@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "795880290408",
+    "project_id": "sell-86b95",
+    "storage_bucket": "sell-86b95.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:795880290408:android:00641a14a120e670eee3dd",
+        "android_client_info": {
+          "package_name": "nath.ariel.sellit_v6"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "795880290408-bf5a2kj01ehg7pieao00e19k3ci29i8e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "nath.ariel.sellit_v6",
+            "certificate_hash": "e01f2812d4b6b103171b342013c9e07b77c78ec1"
+          }
+        },
+        {
+          "client_id": "795880290408-6cpbrg7d3ksj620aa4qhtpff4l3k70k3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBh7QbjgyMA-tnQMqpDbKQAc-qkckCWKGA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "795880290408-6cpbrg7d3ksj620aa4qhtpff4l3k70k3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
