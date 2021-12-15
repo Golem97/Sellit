@@ -10,21 +10,55 @@
     tools:context=".ProfilActivity">
 
     <TextView
+        android:id="@+id/textView"
         style="@style/MaterialAlertDialog.MaterialComponents.Title.Icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="You'r LoggedIn as"
-        tools:layout_editor_absoluteX="105dp"
-        tools:layout_editor_absoluteY="236dp"
+        android:text="You are logged as"
+        app:layout_constraintBottom_toTopOf="@id/Seller"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/logoutBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:text="Logout"
-        tools:layout_editor_absoluteX="143dp"
-        tools:layout_editor_absoluteY="353dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Seller"
+        app:layout_constraintVertical_bias="0.462"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/Seller"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seller"
+        android:onClick="Seller"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/Buyer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Buyer"
+        android:onClick="Buyer"
+        app:layout_constraintBottom_toTopOf="@+id/logoutBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Seller"
+        app:layout_constraintVertical_bias="0.487"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -33,8 +67,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Email"
-        tools:layout_editor_absoluteX="106dp"
-        tools:layout_editor_absoluteY="285dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

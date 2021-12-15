@@ -12,7 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SellitV6"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ProfilActivity"></activity>
+        <activity
+            android:name=".BuyerActivity"
+            android:exported="false" />
+        <activity android:name=".ProfilActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

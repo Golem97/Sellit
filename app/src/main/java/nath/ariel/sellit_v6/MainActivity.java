@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         binding.googleSignInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //begin Google sign in 
+                //begin Google sign in
                 Log.d(TAG, "onClick: begin Google SignIn");
                 Intent intent = googleSignInClient.getSignInIntent();
                 startActivityForResult(intent, RC_SIGN_IN);
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "onActivityResult: Google Sign in Intent result");
             Task<GoogleSignInAccount> accountTask = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
-                //Indentify with success , now auth  with firebase
+                //Indentify with success , now auth with firebase
                 GoogleSignInAccount account = accountTask.getResult(ApiException.class);
                 firebaseAuthWithGoogleAccount(account);
                 
