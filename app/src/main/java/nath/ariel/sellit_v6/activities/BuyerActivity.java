@@ -1,8 +1,10 @@
-package nath.ariel.sellit_v6;
+package nath.ariel.sellit_v6.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import nath.ariel.sellit_v6.R;
 
 public class BuyerActivity extends AppCompatActivity {
 

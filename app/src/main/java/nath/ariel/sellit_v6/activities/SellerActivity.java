@@ -1,22 +1,16 @@
-package nath.ariel.sellit_v6;
-
-import android.os.Bundle;
-import android.view.View;
+package nath.ariel.sellit_v6.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.auth.FirebaseAuth;
+import android.os.Bundle;
 
-/**
- * Nathanaël Benichou
- */
+import nath.ariel.sellit_v6.R;
+
 public class SellerActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seller);
-
-
     }
 }

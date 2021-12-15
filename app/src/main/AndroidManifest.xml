@@ -13,10 +13,11 @@
         android:theme="@style/Theme.SellitV6"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".BuyerActivity"
+            android:name=".activities.BuyerActivity"
             android:exported="false" />
-        <activity android:name=".ProfilActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.ProfilActivity" />
+        <activity android:name=".activities.SellerActivity" />
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

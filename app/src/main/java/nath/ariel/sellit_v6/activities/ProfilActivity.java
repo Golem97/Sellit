@@ -1,4 +1,4 @@
-package nath.ariel.sellit_v6;
+package nath.ariel.sellit_v6.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,9 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
-import com.google.android.material.transition.MaterialContainerTransform;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -51,7 +49,7 @@ public class ProfilActivity extends AppCompatActivity {
         binding.Seller.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 Intent intent = new Intent(getApplicationContext(), BuyerActivity.class);
+                 Intent intent = new Intent(getApplicationContext(), SellerActivity.class);
                  startActivity(intent);
             }
         });
@@ -60,7 +58,7 @@ public class ProfilActivity extends AppCompatActivity {
         binding.Buyer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SellerActivity.class);
+                Intent intent = new Intent(getApplicationContext(), BuyerActivity.class);
                 startActivity(intent);
             }
         });

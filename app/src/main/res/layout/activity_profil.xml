@@ -7,7 +7,7 @@
     android:padding="20dp"
     android:layout_gravity="center"
     android:layout_height="match_parent"
-    tools:context=".ProfilActivity">
+    tools:context=".activities.ProfilActivity">
 
     <TextView
         android:id="@+id/textView"
