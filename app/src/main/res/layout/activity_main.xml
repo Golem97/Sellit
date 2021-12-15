@@ -26,13 +26,11 @@
         style="@style/MaterialAlertDialog.MaterialComponents.Title.Icon"
         android:layout_width="121dp"
         android:layout_height="24dp"
-        android:layout_marginTop="88dp"
-        android:text="Welcome to Sellit"
+        android:text="  Welcome to Sellit"
         app:layout_constraintBottom_toTopOf="@+id/googleSignInBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iconIv"
-        app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints" />
 
     <com.google.android.gms.common.SignInButton
@@ -44,7 +42,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.846" />
+        app:layout_constraintVertical_bias="0.8" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

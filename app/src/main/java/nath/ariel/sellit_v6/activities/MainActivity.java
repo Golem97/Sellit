@@ -5,7 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.net.Uri;
+//import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,7 +25,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-import classes.User;
+//import classes.User;
 import nath.ariel.sellit_v6.R;
 import nath.ariel.sellit_v6.databinding.ActivityMainBinding;
 
@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                         //get  User Info
                         String uid = firebaseUser.getUid();
                         String email = firebaseUser.getEmail();
-                        Uri profilePic = firebaseUser.getPhotoUrl();
+                        //Uri profilePic = firebaseUser.getPhotoUrl();
                         String name = firebaseUser.getDisplayName();
 
                         Log.d(TAG, "onSuccess: Email "+email);
@@ -127,7 +127,9 @@ public class MainActivity extends AppCompatActivity {
                             Log.d(TAG, "onSuccess: Account Created");
 
                             //User Constructor : User(String userId, String name, Uri profilePicture, String email)
-                            User newUser = new User(uid,name,profilePic,email);
+                            //
+                            // User newUser = new User(uid,name,profilePic,email);
+                            //
                             //User constructor shall also create a User and add it to the firebase database
 
                             Toast.makeText(MainActivity.this, "Account created ..\n"+email, Toast.LENGTH_SHORT).show();
@@ -150,7 +152,6 @@ public class MainActivity extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
                         //logg failed
                         Log.d(TAG, "onFailure: Failed Signin "+e.getMessage());
-
                     }
                 });
     }

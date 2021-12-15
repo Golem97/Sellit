@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Seller extends User {
 
-    private List<Item> sellingItems;
+    private List<Item> itemsForSell;
     private List<Item> sellHistory;
 
     public Seller(String userId, String name, Uri profilePicture, String email) {
