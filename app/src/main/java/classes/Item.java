@@ -5,11 +5,13 @@ package classes;
  */
 public class Item {
 
+    private int itemId;
     private String name;
     private String description;
     private int price;
-    boolean available;
-    boolean inRequest;
+    private boolean available;
+//    private boolean inRequest;
+
 
 
 }

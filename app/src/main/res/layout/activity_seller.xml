@@ -3,28 +3,54 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/topblue">
 
 
-    <EditText
-        android:id="@+id/Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="sell"
-        app:layout_constraintBottom_toTopOf="@+id/Item"
-        app:layout_constraintEnd_toEndOf="parent"
+    <ImageView
+        android:id="@+id/chatIcon"
+        android:layout_width="118dp"
+        android:layout_height="111dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="620dp"
+        android:src="@drawable/chat_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/seller_name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:padding="20dp"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/Item"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Item"
+    <TextView
+        android:id="@+id/seller_name"
+        android:layout_width="308dp"
+        android:layout_height="124dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="641dp"
+        android:text="Seller Name"
+        android:textAlignment="center"
+        android:textColor="#263238"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/chatIcon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.333" />
+
+    <ImageButton
+        android:id="@+id/upload"
+        android:layout_width="435dp"
+        android:layout_height="207dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="upload image here"
+        android:cropToPadding="false"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:padding="20dp"/>
+        app:layout_constraintVertical_bias="0.32999998"
+        app:srcCompat="@drawable/upload_picture" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

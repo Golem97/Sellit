@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/topblue"
     tools:context=".activities.MainActivity">
 
 
@@ -14,6 +15,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="204dp"
         android:src="@drawable/sellit"
+        app:layout_constraintBottom_toTopOf="@+id/googleSignInBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.469"
         app:layout_constraintStart_toStartOf="parent"

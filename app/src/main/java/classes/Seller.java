@@ -1,5 +1,7 @@
 package classes;
 
+import android.net.Uri;
+
 import java.util.List;
 
 /**
@@ -10,12 +12,17 @@ public class Seller extends User {
     private List<Item> sellingItems;
     private List<Item> sellHistory;
 
-
-    private boolean acceptRequest(Item i){
-        //set i.inRequest = false
-        //set i.available = false
-        //add item to buyer's buyHistory
-        //add item to Seller's sellHistory
-        return true;
+    public Seller(String userId, String name, Uri profilePicture, String email) {
+        super(userId, name, profilePicture, email);
     }
+
+
+//    private boolean acceptRequest(Item i){
+//        //set i.inRequest = false
+//        //set i.available = false
+//        //add item to buyer's buyHistory
+//        //add item to Seller's sellHistory
+//        return true;
+//    }
+
 }

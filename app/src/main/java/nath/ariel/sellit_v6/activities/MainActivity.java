@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,6 +25,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import classes.User;
 import nath.ariel.sellit_v6.R;
 import nath.ariel.sellit_v6.databinding.ActivityMainBinding;
 
@@ -65,16 +67,13 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "onClick: begin Google SignIn");
                 Intent intent = googleSignInClient.getSignInIntent();
                 startActivityForResult(intent, RC_SIGN_IN);
-
-
-
             }
         });
 
     }
 
     private void checkUser() {
-        //if user already loggded in go to user activity
+        //if user already logged in go to user activity
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         if (firebaseUser!=null){
             Log.d(TAG, "checkUser: Already logged in ");
@@ -92,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "onActivityResult: Google Sign in Intent result");
             Task<GoogleSignInAccount> accountTask = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
-                //Indentify with success , now auth with firebase
+                //Identify with success , now auth with firebase
                 GoogleSignInAccount account = accountTask.getResult(ApiException.class);
                 firebaseAuthWithGoogleAccount(account);
                 
@@ -104,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void firebaseAuthWithGoogleAccount(GoogleSignInAccount account) {
-        Log.d(TAG, "firebaseAuthWithGoogleAccount: bgin firebase auth with google account");
+        Log.d(TAG, "firebaseAuthWithGoogleAccount: begin firebase auth with google account");
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(),null);
         firebaseAuth.signInWithCredential(credential)
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
@@ -116,14 +115,21 @@ public class MainActivity extends AppCompatActivity {
                         //get  User Info
                         String uid = firebaseUser.getUid();
                         String email = firebaseUser.getEmail();
+                        Uri profilePic = firebaseUser.getPhotoUrl();
+                        String name = firebaseUser.getDisplayName();
 
                         Log.d(TAG, "onSuccess: Email "+email);
                         Log.d(TAG, "onSuccess: Uid "+uid);
                         //check if user is new or existing
 
                         if (authResult.getAdditionalUserInfo().isNewUser()){
-                            //User is new : creat new account
+                            //User is new : create new account
                             Log.d(TAG, "onSuccess: Account Created");
+
+                            //User Constructor : User(String userId, String name, Uri profilePicture, String email)
+                            User newUser = new User(uid,name,profilePic,email);
+                            //User constructor shall also create a User and add it to the firebase database
+
                             Toast.makeText(MainActivity.this, "Account created ..\n"+email, Toast.LENGTH_SHORT).show();
                         }
                         else {
