@@ -8,59 +8,72 @@
     android:layout_gravity="center"
     android:layout_height="match_parent"
     android:background="@drawable/topblue"
-    tools:context=".activities.ProfilActivity">
+    tools:context=".activities.ProfileActivity">
+
 
     <TextView
         android:id="@+id/textView"
         style="@style/MaterialAlertDialog.MaterialComponents.Title.Icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="You are logged as"
+        android:text="Welcome"
         app:layout_constraintBottom_toTopOf="@id/Seller"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.19"
+        app:layout_constraintVertical_bias="0.365"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/chatIcon"
+        android:layout_width="77dp"
+        android:layout_height="77dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/chat_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/Seller"
+        android:layout_width="140dp"
+        android:layout_height="51dp"
+        android:onClick="Seller"
+        android:text="Seller"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.161"
+        app:layout_constraintStart_toEndOf="@+id/Buyer"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.785"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/logoutBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_width="174dp"
+        android:layout_height="46dp"
         android:text="Logout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Seller"
-        app:layout_constraintVertical_bias="0.462"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/Seller"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Seller"
-        android:onClick="Seller"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.657"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/Buyer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Buyer"
+        android:layout_width="158dp"
+        android:layout_height="54dp"
         android:onClick="Buyer"
-        app:layout_constraintBottom_toTopOf="@+id/logoutBtn"
+        android:text="Buyer"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.146"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Seller"
-        app:layout_constraintVertical_bias="0.487"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.79"
         tools:ignore="MissingConstraints" />
 
     <TextView

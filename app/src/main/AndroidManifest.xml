@@ -7,7 +7,7 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label=""
+        android:label="SELLIT"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SellitV6"
@@ -15,7 +15,7 @@
         <activity
             android:name=".activities.BuyerActivity"
             android:exported="false" />
-        <activity android:name=".activities.ProfilActivity" />
+        <activity android:name=".activities.ProfileActivity" />
         <activity android:name=".activities.SellerActivity" />
         <activity android:name=".activities.MainActivity">
             <intent-filter>

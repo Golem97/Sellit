@@ -22,7 +22,7 @@ public class User {
 
     private boolean isSeller;
     private boolean isBuyer;
-    private String address;
+    private String address = "";
 
 
     /*********** CONSTRUCTORS ***********/

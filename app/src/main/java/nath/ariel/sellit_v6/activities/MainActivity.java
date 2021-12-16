@@ -26,8 +26,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-import classes.DAOUser;
-import classes.User;
 import nath.ariel.sellit_v6.R;
 import nath.ariel.sellit_v6.databinding.ActivityMainBinding;
 
@@ -84,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         if (firebaseUser!=null){
             Log.d(TAG, "checkUser: Already logged in ");
-            startActivity(new Intent(this,ProfilActivity.class));
+            startActivity(new Intent(this, ProfileActivity.class));
             finish();
         }
 
@@ -132,15 +130,6 @@ public class MainActivity extends AppCompatActivity {
                         if (authResult.getAdditionalUserInfo().isNewUser()){
                             //User is new : create new account
                             Log.d(TAG, "onSuccess: Account Created");
-
-                            //Construct new user with all Google infos
-                            User newUser = new User(uid,name,profilePic,email);
-
-                            //call DAOUser to add newUser to realtime database
-                            DAOUser dao = new DAOUser();
-                            dao.addUserToFirebase(newUser);
-
-
                             Toast.makeText(MainActivity.this, "Account created ..\n"+email, Toast.LENGTH_SHORT).show();
                         }
                         else {
@@ -151,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
                         }
 
                         //Start profil Activity
-                        startActivity(new Intent(MainActivity.this ,ProfilActivity.class));
+                        startActivity(new Intent(MainActivity.this , ProfileActivity.class));
                         finish();
 
                     }

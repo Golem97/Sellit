@@ -11,12 +11,12 @@ import android.view.View;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import nath.ariel.sellit_v6.databinding.ActivityProfilBinding;
+import nath.ariel.sellit_v6.databinding.ActivityProfileBinding;
 
-public class ProfilActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity {
 
     //view  Binding
-    private ActivityProfilBinding binding ;
+    private ActivityProfileBinding binding ;
 
     private FirebaseAuth firebaseAuth;
     private static final String TAG ="PROFIL_ACTIVITY_TAG";
@@ -26,8 +26,9 @@ public class ProfilActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         //binding to layout
-        binding = ActivityProfilBinding.inflate(getLayoutInflater());
+        binding = ActivityProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
 
         //Disable Landscape Mode
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);

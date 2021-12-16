@@ -7,8 +7,6 @@ import android.os.Bundle;
 
 import nath.ariel.sellit_v6.R;
 import nath.ariel.sellit_v6.databinding.ActivityBuyerBinding;
-import nath.ariel.sellit_v6.databinding.ActivityMainBinding;
-import nath.ariel.sellit_v6.databinding.ActivityProfilBinding;
 
 public class BuyerActivity extends AppCompatActivity {
 

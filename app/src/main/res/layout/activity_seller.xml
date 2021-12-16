@@ -7,41 +7,80 @@
     android:background="@drawable/topblue">
 
 
+    <EditText
+        android:id="@+id/product_title2"
+        android:layout_width="294dp"
+        android:layout_height="48dp"
+        android:text="Price : "
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.93"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/product_title3"
+        android:layout_width="287dp"
+        android:layout_height="137dp"
+        android:text="Description :"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.477"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.768"
+        tools:ignore="MissingConstraints" />
+
     <ImageView
         android:id="@+id/chatIcon"
-        android:layout_width="118dp"
-        android:layout_height="111dp"
+        android:layout_width="77dp"
+        android:layout_height="77dp"
         android:layout_centerHorizontal="true"
         android:layout_marginEnd="12dp"
-        android:layout_marginBottom="620dp"
         android:src="@drawable/chat_icon"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/seller_name"
+        app:layout_constraintBottom_toTopOf="@+id/product_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.406" />
+
+    <EditText
+        android:id="@+id/product_title"
+        android:layout_width="294dp"
+        android:layout_height="48dp"
+        android:text="ProductTitle : "
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.285"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/seller_name"
-        android:layout_width="308dp"
-        android:layout_height="124dp"
+        android:layout_width="292dp"
+        android:layout_height="45dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="34dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="641dp"
-        android:text="Seller Name"
+        android:text="Profile"
         android:textAlignment="center"
-        android:textColor="#263238"
+        android:textColor="#000000"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/chatIcon"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.333" />
+        app:layout_constraintVertical_bias="0.156" />
 
     <ImageButton
         android:id="@+id/upload"
-        android:layout_width="435dp"
-        android:layout_height="207dp"
+        android:layout_width="302dp"
+        android:layout_height="161dp"
         android:adjustViewBounds="true"
         android:contentDescription="upload image here"
         android:cropToPadding="false"
@@ -50,7 +89,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.32999998"
+        app:layout_constraintVertical_bias="0.475"
         app:srcCompat="@drawable/upload_picture" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

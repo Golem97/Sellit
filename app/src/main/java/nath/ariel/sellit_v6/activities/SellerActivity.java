@@ -5,8 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import nath.ariel.sellit_v6.R;
-import nath.ariel.sellit_v6.databinding.ActivityMainBinding;
-import nath.ariel.sellit_v6.databinding.ActivityProfilBinding;
+
 import nath.ariel.sellit_v6.databinding.ActivitySellerBinding;
 
 
