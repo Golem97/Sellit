@@ -3,6 +3,7 @@ package nath.ariel.sellit_v6.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,8 +25,12 @@ public class ProfilActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //binding to layout
         binding = ActivityProfilBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        //Disable Landscape Mode
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 
         //init firebase auth

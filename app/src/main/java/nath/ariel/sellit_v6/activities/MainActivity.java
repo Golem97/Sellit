@@ -5,7 +5,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-//import android.net.Uri;
+import android.content.pm.ActivityInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,7 +26,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-//import classes.User;
+import classes.DAOUser;
+import classes.User;
 import nath.ariel.sellit_v6.R;
 import nath.ariel.sellit_v6.databinding.ActivityMainBinding;
 
@@ -43,8 +45,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //binding to layout
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        //Disable Landscape Mode
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         //configure the Google Sign in
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -115,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                         //get  User Info
                         String uid = firebaseUser.getUid();
                         String email = firebaseUser.getEmail();
-                        //Uri profilePic = firebaseUser.getPhotoUrl();
+                        Uri profilePic = firebaseUser.getPhotoUrl();
                         String name = firebaseUser.getDisplayName();
 
                         Log.d(TAG, "onSuccess: Email "+email);
@@ -126,11 +133,13 @@ public class MainActivity extends AppCompatActivity {
                             //User is new : create new account
                             Log.d(TAG, "onSuccess: Account Created");
 
-                            //User Constructor : User(String userId, String name, Uri profilePicture, String email)
-                            //
-                            // User newUser = new User(uid,name,profilePic,email);
-                            //
-                            //User constructor shall also create a User and add it to the firebase database
+                            //Construct new user with all Google infos
+                            User newUser = new User(uid,name,profilePic,email);
+
+                            //call DAOUser to add newUser to realtime database
+                            DAOUser dao = new DAOUser();
+                            dao.addUserToFirebase(newUser);
+
 
                             Toast.makeText(MainActivity.this, "Account created ..\n"+email, Toast.LENGTH_SHORT).show();
                         }
