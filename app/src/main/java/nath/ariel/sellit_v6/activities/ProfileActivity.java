@@ -4,10 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -71,7 +74,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void checkUser() {
-        //get  current user
+        //get current user
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         Log.d(TAG+" "+String.valueOf(firebaseUser), "firebaseUser.getCurrentUser successful");
 
@@ -85,15 +88,21 @@ public class ProfileActivity extends AppCompatActivity {
             //user already logged in
             //get user info
             String email = firebaseUser.getEmail();
-            Log.d(TAG+" "+email, "getEmail successfull");
-            //set Email
             binding.emailTv.setText(email);
-            Log.d(TAG, "setText(email) successfull");
+
+            //set Username
+            String name = firebaseUser.getDisplayName();
+            binding.nameTv.setText(name);
+
+            //gets profile picture from google and displays it using Glide
+            setProfilePicture(firebaseUser.getPhotoUrl());
         }
     }
 
-    public void Buyer(View view) {
-
-
+    private void setProfilePicture(Uri profilePictureUrl){
+        Glide.with(this)
+                .load(profilePictureUrl)
+                .apply(RequestOptions.circleCropTransform())
+                .into(binding.profileImageView);
     }
 }
