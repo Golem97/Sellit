@@ -2,8 +2,10 @@
   "project_info": {
     "project_number": "795880290408",
     "project_id": "sell-86b95",
-    "storage_bucket": "sell-86b95.appspot.com"
+    "storage_bucket": "sell-86b95.appspot.com",
+    "firebase_url": "https://sell-86b95-default-rtdb.europe-west1.firebasedatabase.app/"
   },
+
   "client": [
     {
       "client_info": {

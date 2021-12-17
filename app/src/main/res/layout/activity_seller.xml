@@ -8,28 +8,29 @@
 
 
     <EditText
-        android:id="@+id/product_title2"
+        android:id="@+id/price"
         android:layout_width="294dp"
         android:layout_height="48dp"
         android:text="Price : "
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.93"
+        app:layout_constraintVertical_bias="0.846"
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/product_title3"
+        android:id="@+id/descript"
         android:layout_width="287dp"
         android:layout_height="137dp"
         android:text="Description :"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.477"
+        app:layout_constraintHorizontal_bias="0.475"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.768"
+        app:layout_constraintVertical_bias="0.727"
         tools:ignore="MissingConstraints" />
 
     <ImageView
@@ -78,7 +79,7 @@
         app:layout_constraintVertical_bias="0.156" />
 
     <ImageButton
-        android:id="@+id/upload"
+        android:id="@+id/uploadImage"
         android:layout_width="302dp"
         android:layout_height="161dp"
         android:adjustViewBounds="true"
@@ -87,9 +88,21 @@
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.475"
         app:srcCompat="@drawable/upload_picture" />
+
+    <Button
+        android:id="@+id/itemUpload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upload"
+        android:onClick="uploadBtn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/price" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
