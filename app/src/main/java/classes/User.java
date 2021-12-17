@@ -20,8 +20,15 @@ public class User {
     private Uri profilePicture; //obtained by signing in to Google
     private String email; //obtained by signing in to Google
 
-    private boolean isSeller;
-    private boolean isBuyer;
+    //TODO: Items
+    //private List<Item> sellHistory;
+    //private List<Item> forSell;
+    //private List<Item> buyHistory;
+    //private List<Item> wishlist;
+    //TODO: Chats
+    //private Chat<Messages> chat;
+
+
     private String address = "";
 
 
@@ -36,8 +43,6 @@ public class User {
         this.name = name;
         this.profilePicture = profilePicture;
         this.email = email;
-        this.isSeller = false;
-        this.isBuyer = false;
     }
 
     /*********** METHODS ***********/
@@ -77,21 +82,6 @@ public class User {
         this.email = email;
     }
 
-    public boolean isSeller() {
-        return isSeller;
-    }
-
-    public void setSeller(boolean seller) {
-        isSeller = seller;
-    }
-
-    public boolean isBuyer() {
-        return isBuyer;
-    }
-
-    public void setBuyer(boolean buyer) {
-        isBuyer = buyer;
-    }
 
     public String getAddress() {
         return address;
