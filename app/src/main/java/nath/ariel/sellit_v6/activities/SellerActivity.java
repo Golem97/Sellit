@@ -38,7 +38,7 @@ public class SellerActivity extends AppCompatActivity {
         //Disable Landscape Mode
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        database = FirebaseDatabase.getInstance().getReference();
+        database = FirebaseDatabase.getInstance("https://sell-86b95-default-rtdb.europe-west1.firebasedatabase.app").getReference();
 
         //handle click on logout button
         binding.itemUpload.setOnClickListener(new View.OnClickListener() {
@@ -55,7 +55,7 @@ public class SellerActivity extends AppCompatActivity {
                 System.out.println(binding.productTitle.getText()+" "+binding.descript.getText()+" "+binding.price.getText()+" "
                         +"www.stam.co.il" + firebaseAuth.getUid());
                 System.out.println("database reference: "+database);
-                database.child("Sellit").child("Items").setValue(item);
+                database.child("Sellit").child("Items").push().setValue(item);
             }
         });
     }

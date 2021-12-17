@@ -1,11 +1,10 @@
 {
   "project_info": {
     "project_number": "795880290408",
+    "firebase_url": "https://sell-86b95-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "sell-86b95",
-    "storage_bucket": "sell-86b95.appspot.com",
-    "firebase_url": "https://sell-86b95-default-rtdb.europe-west1.firebasedatabase.app/"
+    "storage_bucket": "sell-86b95.appspot.com"
   },
-
   "client": [
     {
       "client_info": {
@@ -21,6 +20,14 @@
           "android_info": {
             "package_name": "nath.ariel.sellit_v6",
             "certificate_hash": "e01f2812d4b6b103171b342013c9e07b77c78ec1"
+          }
+        },
+        {
+          "client_id": "795880290408-jk2umt5c2ctkqojhe6cr96jq50qpakjh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "nath.ariel.sellit_v6",
+            "certificate_hash": "09576aacf122055b5ca2c8c84c57ac723af5f06f"
           }
         },
         {
