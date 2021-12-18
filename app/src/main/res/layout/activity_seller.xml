@@ -7,11 +7,37 @@
     android:background="@drawable/topblue">
 
 
+    <TextView
+        android:id="@+id/nameTvSeller"
+        style="@style/MaterialAlertDialog.MaterialComponents.Title.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Username"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.89"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileImageSeller"
+        app:layout_constraintVertical_bias="0.01999998"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/profileImageSeller"
+        android:layout_width="74dp"
+        android:layout_height="75dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.811"
+        app:layout_constraintStart_toEndOf="@+id/chatIcon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.044"
+        app:srcCompat="@drawable/ic_anon_user_48dp" />
+
     <EditText
         android:id="@+id/price"
         android:layout_width="294dp"
         android:layout_height="48dp"
-        android:text="Price : "
+        android:hint="Price"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -22,15 +48,14 @@
 
     <EditText
         android:id="@+id/descript"
-        android:layout_width="287dp"
-        android:layout_height="137dp"
-        android:text="Description :"
+        android:layout_width="297dp"
+        android:layout_height="72dp"
+        android:hint="Description"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.475"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.727"
+        app:layout_constraintVertical_bias="0.745"
         tools:ignore="MissingConstraints" />
 
     <ImageView
@@ -51,7 +76,7 @@
         android:id="@+id/product_title"
         android:layout_width="294dp"
         android:layout_height="48dp"
-        android:text="ProductTitle : "
+        android:hint="Title"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,39 +84,20 @@
         app:layout_constraintVertical_bias="0.285"
         tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/seller_name"
-        android:layout_width="292dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="34dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="641dp"
-        android:text="Profile"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/chatIcon"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.156" />
-
     <ImageButton
         android:id="@+id/uploadImage"
-        android:layout_width="302dp"
-        android:layout_height="161dp"
+        android:layout_width="296dp"
+        android:layout_height="222dp"
         android:adjustViewBounds="true"
         android:contentDescription="upload image here"
         android:cropToPadding="false"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.475"
+        app:layout_constraintVertical_bias="0.499"
         app:srcCompat="@drawable/upload_picture" />
 
     <Button
