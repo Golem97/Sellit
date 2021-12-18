@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -96,6 +97,7 @@ public class SellerActivity extends AppCompatActivity {
         binding.itemUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //avoid uploading when no image and uploading too many times by clicking on upload button too fast
                 if (mUploadTask != null && mUploadTask.isInProgress()) {
                     Toast.makeText(SellerActivity.this, "Upload in progress", Toast.LENGTH_SHORT).show();
                 } else {
@@ -146,13 +148,18 @@ public class SellerActivity extends AppCompatActivity {
 
     private void uploadFile() {
         if (imageUrl != null) {
-            StorageReference fileReference = storage.child("Items").child(System.currentTimeMillis()
+
+            long picId = System.currentTimeMillis();
+            StorageReference fileReference = storage.child("Items").child(picId
                     + "." + getFileExtension(imageUrl));
+
             //upload to storage
             mUploadTask = fileReference.putFile(imageUrl)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                            //delay progressBar
                             Handler handler = new Handler();
                             handler.postDelayed(new Runnable() {
                                 @Override
@@ -161,23 +168,29 @@ public class SellerActivity extends AppCompatActivity {
                                 }
                             }, 500);
 
-                            Toast.makeText(SellerActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
+                            Task<Uri> task = taskSnapshot.getMetadata().getReference().getDownloadUrl();
+                            task.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    String downloadUrl = uri.toString();
+                                    //upload to realtime database
+                                    //get items infos
+                                    String id = firebaseAuth.getUid();
+                                    String name = String.valueOf(binding.productTitle.getText());
+                                    String descript = String.valueOf(binding.descript.getText());
+                                    int price = binding.price.getInputType();
+                                    //String downloadUrl = taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
 
-                            //upload to realtime database
-                            //get items infos
-                            String id = firebaseAuth.getUid();
-                            String name = String.valueOf(binding.productTitle.getText());
-                            String descript = String.valueOf(binding.descript.getText());
-                            int price = binding.price.getInputType();
-                            String downloadUrl = taskSnapshot.getStorage().getDownloadUrl().toString();
+                                    //create item
+                                    Item item = new Item(id, name, descript, price, true, downloadUrl);
 
-                            //create item
-                            Item item = new Item(id, name, descript, price, true, downloadUrl);
+                                    String uploadId = database.child("Items").push().getKey();
+                                    System.out.println("\n\n uploadId ="+uploadId+"\n\n");
+                                    database.child(uploadId).setValue(item);
 
-
-                            String uploadId = database.child("Items").push().getKey();
-                            System.out.println("\n\n uploadId ="+uploadId+"\n\n");
-                            database.child(uploadId).setValue(item);
+                                    Toast.makeText(SellerActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
+                                }
+                            });
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
