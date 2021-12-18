@@ -12,9 +12,9 @@ public class Item {
     private String description;
     private int price;
     private boolean available;
-    private Uri photoUrl;
+    private String photoUrl;
 
-    public Item(String user_id, String name, String description, int price, boolean available, Uri photoUrl) {
+    public Item(String user_id, String name, String description, int price, boolean available, String photoUrl) {
         this.user_id = user_id;
         this.name = name;
         this.description = description;
@@ -61,9 +61,9 @@ public class Item {
 
     public void setAvailable(boolean available) { this.available = available; }
 
-    public Uri getPhotoUrl() { return photoUrl; }
+    public String getPhotoUrl() { return photoUrl; }
 
-    public void setPhotoUrl(Uri photoUrl) {
+    public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
     }
 }
