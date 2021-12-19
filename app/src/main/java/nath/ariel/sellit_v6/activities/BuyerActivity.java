@@ -43,7 +43,8 @@ public class BuyerActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
 
     //Adapter
-    private ImageAdapter mAdapter = new ImageAdapter();;
+    private ImageAdapter mAdapter = new ImageAdapter();
+    ;
 
     //Items List
     private List<Item> mUploads;
@@ -52,7 +53,7 @@ public class BuyerActivity extends AppCompatActivity {
     private ActivityBuyerBinding binding;
 
     //TAG
-    private static final String TAG ="BUYER_ACTIVITY_IN_TAG";
+    private static final String TAG = "BUYER_ACTIVITY_IN_TAG";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -86,21 +87,24 @@ public class BuyerActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        mUploads= new ArrayList<>();
+        mUploads = new ArrayList<>();
 
         //Get References
-        mDatabaseReference= FirebaseDatabase.getInstance("https://sell-86b95-default-rtdb.europe-west1.firebasedatabase.app")
+        mDatabaseReference = FirebaseDatabase.getInstance("https://sell-86b95-default-rtdb.europe-west1.firebasedatabase.app")
                 .getReference("Sellit/Items");
 
         //get data
         mDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) { //dataSnapshot is a List containing our data
-                for(DataSnapshot postSnapshot : dataSnapshot.getChildren()){
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    //get item
                     Item item = postSnapshot.getValue(Item.class);
-                    if(!item.getUser_id().equals(id)) {
-                        mUploads.add(item);
-                   }
+
+                    //if item doesn't belong to current user
+                    if (!item.getUser_id().equals(id)) {
+                        mUploads.add(item); //then it's buyable by him
+                    }
                 }
                 //update adapter
                 mAdapter.setContext(BuyerActivity.this);
@@ -113,7 +117,7 @@ public class BuyerActivity extends AppCompatActivity {
             //When we don't have permission to access the data
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(BuyerActivity.this, databaseError.getMessage() , Toast.LENGTH_SHORT).show();
+                Toast.makeText(BuyerActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

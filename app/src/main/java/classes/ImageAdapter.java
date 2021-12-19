@@ -11,12 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
 import nath.ariel.sellit_v6.R;
-
 
 /**
  * Created by Jordan Perez on 19/12/2021
@@ -32,24 +30,25 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
         mItems = items;
     }
 
-    public ImageAdapter() { }
+    public ImageAdapter() {
+    }
 
     //Return matching ImageViewHolder
     @NonNull
     @Override
     public ImageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(mContext).inflate(R.layout.activity_image,parent,false);
+        View v = LayoutInflater.from(mContext).inflate(R.layout.activity_image, parent, false);
         return new ImageViewHolder(v);
     }
 
-     @Override
+    //Displays item title, item price and image
+    @Override
     public void onBindViewHolder(ImageViewHolder holder, int position) {
         Item uploadCurrent = mItems.get(position);
         holder.textViewName.setText(uploadCurrent.getName());
 
         String priceText = String.valueOf(uploadCurrent.getPrice());
-        holder.textViewPrice.setText((priceText));
-
+        holder.textViewPrice.setText((priceText) + " $");
 
         Glide.with(mContext)
                 .load(uploadCurrent.getPhotoUrl())
@@ -83,7 +82,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
     }
 
     //ImageViewHolder Inner Class
-    public class ImageViewHolder extends RecyclerView.ViewHolder{
+    public class ImageViewHolder extends RecyclerView.ViewHolder {
         public TextView textViewName;
         public TextView textViewPrice;
         public ImageView imageView;

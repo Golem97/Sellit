@@ -57,7 +57,7 @@ public class SellerActivity extends AppCompatActivity {
     private StorageTask mUploadTask;
 
     //TAG
-    private static final String TAG ="SELLER_ACTIVITY_IN_TAG";
+    private static final String TAG = "SELLER_ACTIVITY_IN_TAG";
 
 
     @Override
@@ -113,9 +113,6 @@ public class SellerActivity extends AppCompatActivity {
                 } else {
                     //upload to storage
                     uploadFile();
-
-
-                    //TODO: redirect to personal gallery : Create proper intent to switch to gallery layout
                 }
             }
         });
@@ -159,7 +156,8 @@ public class SellerActivity extends AppCompatActivity {
     //check if there are no empty field and if entered price is an int
     private TextWatcher mTextWatcher = new TextWatcher() {
         @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -172,7 +170,8 @@ public class SellerActivity extends AppCompatActivity {
         }
 
         @Override
-        public void afterTextChanged(Editable editable) {}
+        public void afterTextChanged(Editable editable) {
+        }
     };
 
     private void uploadFile() {
@@ -213,13 +212,14 @@ public class SellerActivity extends AppCompatActivity {
 
                                     //upload
                                     String uploadId = database.child("Items").push().getKey();
-                                    System.out.println("\n\n uploadId ="+uploadId+"\n\n");
+                                    System.out.println("\n\n uploadId =" + uploadId + "\n\n");
                                     database.child("Items").child(uploadId).setValue(item);
-                                    Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-                                    startActivity(intent);
-
 
                                     Toast.makeText(SellerActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
+
+                                    //After successfully uploading item redirect to profile
+                                    Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                                    startActivity(intent);
                                 }
                             });
                         }
