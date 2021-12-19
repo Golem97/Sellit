@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Sellit-V6</string>
     <string name="sellit">SELLIT</string>
+    <string name="username">Username</string>
+    <string name="price">Price</string>
+    <string name="description">Description</string>
+    <string name="title">Title</string>
+    <string name="upload_image_here">upload image here</string>
+    <string name="upload">Upload</string>
 </resources>

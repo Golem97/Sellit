@@ -20,7 +20,7 @@ public class User {
     private Uri profilePicture; //obtained by signing in to Google
     private String email; //obtained by signing in to Google
 
-    //TODO: Items
+    //TODO: ItemsList
     //private List<Item> sellHistory;
     //private List<Item> forSell;
     //private List<Item> buyHistory;

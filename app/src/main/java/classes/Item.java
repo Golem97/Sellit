@@ -10,11 +10,11 @@ public class Item {
     private String user_id;
     private String name;
     private String description;
-    private int price;
+    private double price;
     private boolean available;
     private String photoUrl;
 
-    public Item(String user_id, String name, String description, int price, boolean available, String photoUrl) {
+    public Item(String user_id, String name, String description, double price, boolean available, String photoUrl) {
         this.user_id = user_id;
         this.name = name;
         this.description = description;
@@ -47,7 +47,7 @@ public class Item {
         this.description = description;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 

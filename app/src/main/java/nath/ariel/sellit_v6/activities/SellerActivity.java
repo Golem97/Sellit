@@ -10,6 +10,8 @@ import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.EditText;
@@ -67,14 +69,12 @@ public class SellerActivity extends AppCompatActivity {
         binding = ActivitySellerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        firebaseAuth = FirebaseAuth.getInstance();
         //Disable Landscape Mode
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         //get our storage and database references
         database = FirebaseDatabase.getInstance("https://sell-86b95-default-rtdb.europe-west1.firebasedatabase.app").getReference("Sellit");
         storage = FirebaseStorage.getInstance("gs://sell-86b95.appspot.com").getReference("Sellit");
-
 
         //set profile picture
         setProfilePicture(firebaseUser.getPhotoUrl());
@@ -83,7 +83,11 @@ public class SellerActivity extends AppCompatActivity {
         String name = firebaseUser.getDisplayName();
         binding.nameTvSeller.setText(name);
 
-        //TODO: handle safe entry
+        //check if there are no empty field + if price is an int
+        binding.productTitle.addTextChangedListener(mTextWatcher);
+        binding.descript.addTextChangedListener(mTextWatcher);
+        binding.price.addTextChangedListener(mTextWatcher);
+
 
         //handle click on Imageupload button
         binding.uploadImage.setOnClickListener(new View.OnClickListener() {
@@ -104,8 +108,8 @@ public class SellerActivity extends AppCompatActivity {
                     //upload to storage
                     uploadFile();
 
+
                     //TODO: redirect to personal gallery : Create proper intent to switch to gallery layout
-                    //here
                 }
             }
         });
@@ -146,9 +150,27 @@ public class SellerActivity extends AppCompatActivity {
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 
+    //check if there are no empty field and if entered price is an int
+    private TextWatcher mTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            String mTitle = binding.productTitle.getText().toString().trim();
+            String mDescript = binding.descript.getText().toString().trim();
+            String mPrice = binding.price.getText().toString().trim();
+
+            binding.itemUpload.setEnabled(!mTitle.isEmpty() && !mDescript.isEmpty() && !mPrice.isEmpty());
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {}
+    };
+
     private void uploadFile() {
         if (imageUrl != null) {
-
             long picId = System.currentTimeMillis();
             StorageReference fileReference = storage.child("Items").child(picId
                     + "." + getFileExtension(imageUrl));
@@ -178,12 +200,12 @@ public class SellerActivity extends AppCompatActivity {
                                     String id = firebaseAuth.getUid();
                                     String name = String.valueOf(binding.productTitle.getText());
                                     String descript = String.valueOf(binding.descript.getText());
-                                    int price = binding.price.getInputType();
-                                    //String downloadUrl = taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
+                                    double price = Integer.parseInt(binding.price.getText().toString());
 
                                     //create item
                                     Item item = new Item(id, name, descript, price, true, downloadUrl);
 
+                                    //upload
                                     String uploadId = database.child("Items").push().getKey();
                                     System.out.println("\n\n uploadId ="+uploadId+"\n\n");
                                     database.child(uploadId).setValue(item);
