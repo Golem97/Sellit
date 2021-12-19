@@ -45,10 +45,11 @@ public class SellerActivity extends AppCompatActivity {
     //firebase
     private StorageReference storage;
     private DatabaseReference database;
+    private FirebaseAuth firebaseAuth;
 
     //binding
     private ActivitySellerBinding binding;
-    private FirebaseAuth firebaseAuth;
+
 
     //image url
     private Uri imageUrl;
@@ -61,16 +62,16 @@ public class SellerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seller);
 
-        //get user
-        firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        //Disable Landscape Mode
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         //binding to layout
         binding = ActivitySellerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        //Disable Landscape Mode
-        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        //get user
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
 
         //get our storage and database references
         database = FirebaseDatabase.getInstance("https://sell-86b95-default-rtdb.europe-west1.firebasedatabase.app").getReference("Sellit");
