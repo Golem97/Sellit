@@ -209,7 +209,10 @@ public class SellerActivity extends AppCompatActivity {
                                     //upload
                                     String uploadId = database.child("Items").push().getKey();
                                     System.out.println("\n\n uploadId ="+uploadId+"\n\n");
-                                    database.child(uploadId).setValue(item);
+                                    database.child("Users").child(id).child("Items").child("For_Sell").child(uploadId).setValue(item);
+                                    Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                                    startActivity(intent);
+
 
                                     Toast.makeText(SellerActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
                                 }

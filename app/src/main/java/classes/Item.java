@@ -14,6 +14,10 @@ public class Item {
     private boolean available;
     private String photoUrl;
 
+    //Empty Constructor needed
+    public Item() { }
+
+    //Constructor
     public Item(String user_id, String name, String description, double price, boolean available, String photoUrl) {
         this.user_id = user_id;
         this.name = name;
@@ -22,6 +26,7 @@ public class Item {
         this.available = available;
         this.photoUrl = photoUrl;
     }
+
 
     public String getUser_id() {
         return user_id;

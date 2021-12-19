@@ -1,15 +1,15 @@
 package nath.ariel.sellit_v6.activities;
 
+import android.content.pm.ActivityInfo;
+import android.net.Uri;
+import android.os.Bundle;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.pm.ActivityInfo;
-import android.net.Uri;
-import android.os.Bundle;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -23,16 +23,14 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
-import java.util.EventListener;
 import java.util.List;
 
 import classes.ImageAdapter;
 import classes.Item;
 import nath.ariel.sellit_v6.R;
 import nath.ariel.sellit_v6.databinding.ActivityBuyerBinding;
-import nath.ariel.sellit_v6.databinding.ActivitySellerBinding;
 
-public class BuyerActivity extends AppCompatActivity {
+public class MyItemsActivity extends AppCompatActivity {
 
     //firebase
     private StorageReference storage;
@@ -96,7 +94,7 @@ public class BuyerActivity extends AppCompatActivity {
                     Item item = postSnapshot.getValue(Item.class);
                     mUploads.add(item);
                 }
-                mAdapter = new ImageAdapter(BuyerActivity.this, mUploads);
+                mAdapter = new ImageAdapter(MyItemsActivity.this, mUploads);
                 mRecyclerView.setAdapter(mAdapter);
 
             }
@@ -104,7 +102,7 @@ public class BuyerActivity extends AppCompatActivity {
             //When we don't have permission to access the data
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(BuyerActivity.this, databaseError.getMessage() , Toast.LENGTH_SHORT).show();
+                Toast.makeText(MyItemsActivity.this, databaseError.getMessage() , Toast.LENGTH_SHORT).show();
             }
         });
     }

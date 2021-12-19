@@ -9,6 +9,8 @@ import android.net.Uri;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.List;
+
 
 /*********** CLASS ***********/
 public class User {
@@ -22,7 +24,7 @@ public class User {
 
     //TODO: ItemsList
     //private List<Item> sellHistory;
-    //private List<Item> forSell;
+    private List<Item> forSell;
     //private List<Item> buyHistory;
     //private List<Item> wishlist;
     //TODO: Chats
