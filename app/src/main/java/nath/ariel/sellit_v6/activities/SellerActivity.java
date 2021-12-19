@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.EditText;
@@ -50,17 +51,21 @@ public class SellerActivity extends AppCompatActivity {
     //binding
     private ActivitySellerBinding binding;
 
-
     //image url
     private Uri imageUrl;
 
     private StorageTask mUploadTask;
+
+    //TAG
+    private static final String TAG ="SELLER_ACTIVITY_IN_TAG";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seller);
+
+        Log.d(TAG, "Entering Activity");
 
         //Disable Landscape Mode
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -209,7 +214,7 @@ public class SellerActivity extends AppCompatActivity {
                                     //upload
                                     String uploadId = database.child("Items").push().getKey();
                                     System.out.println("\n\n uploadId ="+uploadId+"\n\n");
-                                    database.child("Users").child(id).child("Items").child("For_Sell").child(uploadId).setValue(item);
+                                    database.child("Items").child(uploadId).setValue(item);
                                     Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
                                     startActivity(intent);
 

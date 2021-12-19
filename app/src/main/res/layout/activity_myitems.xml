@@ -5,31 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/topblue"
-    tools:context=".activities.BuyerActivity">
+    tools:context=".activities.MyItemsActivity">
+
 
 
     <TextView
-        android:id="@+id/nameTvBuyer"
+        android:id="@+id/nameTvMyItems"
         style="@style/MaterialAlertDialog.MaterialComponents.Title.Icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
         android:layout_marginBottom="29dp"
         android:text="@string/username"
-        app:layout_constraintBottom_toTopOf="@+id/relativeLayoutBuyer"
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayoutMyItems"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.88"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileImageBuyer"
+        app:layout_constraintTop_toBottomOf="@+id/profileImageMyItems"
         tools:ignore="MissingConstraints" />
 
     <ImageView
-        android:id="@+id/profileImageBuyer"
+        android:id="@+id/profileImageMyItems"
         android:layout_width="74dp"
         android:layout_height="75dp"
         android:layout_marginTop="43dp"
         android:layout_marginBottom="11dp"
-        app:layout_constraintBottom_toTopOf="@+id/nameTvBuyer"
+        app:layout_constraintBottom_toTopOf="@+id/nameTvMyItems"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.887"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,12 +38,12 @@
         app:srcCompat="@drawable/ic_anon_user_48dp" />
 
     <ImageView
-        android:id="@+id/chatIconBuyer"
+        android:id="@+id/chatIconMyItems"
         android:layout_width="77dp"
         android:layout_height="77dp"
         android:layout_centerHorizontal="true"
         android:src="@drawable/chat_icon"
-        app:layout_constraintBottom_toTopOf="@+id/relativeLayoutBuyer"
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayoutMyItems"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.119"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +51,7 @@
         app:layout_constraintVertical_bias="0.461" />
 
     <RelativeLayout
-        android:id="@+id/relativeLayoutBuyer"
+        android:id="@+id/relativeLayoutMyItems"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -58,7 +59,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameTvBuyer">
+        app:layout_constraintTop_toBottomOf="@+id/nameTvMyItems">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recylcer_view"

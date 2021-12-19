@@ -42,18 +42,6 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
         return new ImageViewHolder(v);
     }
 
-    //Get data out of uploaded item
-   /* @Override
-    public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
-        Item itemCurrent = mItems.get(position);
-        holder.textViewName.setText(itemCurrent.getName());
-
-        Glide.with(mContext)
-                .load(itemCurrent.getPhotoUrl())
-                .fitCenter()
-                .apply(RequestOptions.centerCropTransform())
-                .into(holder.imageView);
-    }*/
      @Override
     public void onBindViewHolder(ImageViewHolder holder, int position) {
         Item uploadCurrent = mItems.get(position);
@@ -76,6 +64,22 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
     @Override
     public int getItemCount() {
         return mItems.size();
+    }
+
+    public Context getContext() {
+        return mContext;
+    }
+
+    public void setContext(Context context) {
+        mContext = context;
+    }
+
+    public List<Item> getItems() {
+        return mItems;
+    }
+
+    public void setItems(List<Item> items) {
+        mItems = items;
     }
 
     //ImageViewHolder Inner Class

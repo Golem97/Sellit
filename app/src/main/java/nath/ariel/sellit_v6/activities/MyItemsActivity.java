@@ -3,6 +3,7 @@ package nath.ariel.sellit_v6.activities;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,7 +29,7 @@ import java.util.List;
 import classes.ImageAdapter;
 import classes.Item;
 import nath.ariel.sellit_v6.R;
-import nath.ariel.sellit_v6.databinding.ActivityBuyerBinding;
+import nath.ariel.sellit_v6.databinding.ActivityMyitemsBinding;
 
 public class MyItemsActivity extends AppCompatActivity {
 
@@ -46,21 +47,25 @@ public class MyItemsActivity extends AppCompatActivity {
     //Items List
     private List<Item> mUploads;
 
-
     //binding
-    private ActivityBuyerBinding binding ;
+    private ActivityMyitemsBinding binding;
+
+    //TAG
+    private static final String TAG ="MY_ITEM_ACTIVITY_IN_TAG";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_buyer);
+        setContentView(R.layout.activity_myitems);
+
+        Log.d(TAG, "Entering Activity");
 
         //Disable Landscape Mode
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         //binding to layout
-        binding = ActivityBuyerBinding.inflate(getLayoutInflater());
+        binding = ActivityMyitemsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         //get user
@@ -73,7 +78,7 @@ public class MyItemsActivity extends AppCompatActivity {
 
         //set Username
         String name = firebaseUser.getDisplayName();
-        binding.nameTvBuyer.setText(name);
+        binding.nameTvMyItems.setText(name);
 
         //RecyclerView Initialisation + Settings
         mRecyclerView = binding.recylcerView;
@@ -83,7 +88,7 @@ public class MyItemsActivity extends AppCompatActivity {
         mUploads= new ArrayList<>();
 
         mDatabaseReference= FirebaseDatabase.getInstance("https://sell-86b95-default-rtdb.europe-west1.firebasedatabase.app")
-                .getReference("Sellit/Users/"+id+"/Items/For_Sell");
+                .getReference("Sellit/Items");
 
 
         mDatabaseReference.addValueEventListener(new ValueEventListener() {
@@ -92,7 +97,9 @@ public class MyItemsActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) { //dataSnapshot is a List containing our data
                 for(DataSnapshot postSnapshot : dataSnapshot.getChildren()){
                     Item item = postSnapshot.getValue(Item.class);
-                    mUploads.add(item);
+                    if (item.getUser_id().equals(id)) {
+                        mUploads.add(item);
+                    }
                 }
                 mAdapter = new ImageAdapter(MyItemsActivity.this, mUploads);
                 mRecyclerView.setAdapter(mAdapter);
@@ -111,6 +118,6 @@ public class MyItemsActivity extends AppCompatActivity {
         Glide.with(this)
                 .load(profilePictureUrl)
                 .apply(RequestOptions.circleCropTransform())
-                .into(binding.profileImageBuyer);
+                .into(binding.profileImageMyItems);
     }
 }

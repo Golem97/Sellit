@@ -17,6 +17,7 @@
             android:exported="false" />
         <activity android:name=".activities.ProfileActivity" />
         <activity android:name=".activities.SellerActivity" />
+        <activity android:name=".activities.MyItemsActivity" />
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

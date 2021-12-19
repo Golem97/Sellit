@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -30,7 +31,6 @@ import classes.ImageAdapter;
 import classes.Item;
 import nath.ariel.sellit_v6.R;
 import nath.ariel.sellit_v6.databinding.ActivityBuyerBinding;
-import nath.ariel.sellit_v6.databinding.ActivitySellerBinding;
 
 public class BuyerActivity extends AppCompatActivity {
 
@@ -43,20 +43,24 @@ public class BuyerActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
 
     //Adapter
-    private ImageAdapter mAdapter;
+    private ImageAdapter mAdapter = new ImageAdapter();;
 
     //Items List
     private List<Item> mUploads;
 
-
     //binding
-    private ActivityBuyerBinding binding ;
+    private ActivityBuyerBinding binding;
+
+    //TAG
+    private static final String TAG ="BUYER_ACTIVITY_IN_TAG";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buyer);
+
+        Log.d(TAG, "Entering Activity");
 
         //Disable Landscape Mode
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -84,21 +88,26 @@ public class BuyerActivity extends AppCompatActivity {
 
         mUploads= new ArrayList<>();
 
+        //Get References
         mDatabaseReference= FirebaseDatabase.getInstance("https://sell-86b95-default-rtdb.europe-west1.firebasedatabase.app")
-                .getReference("Sellit/Users/"+id+"/Items/For_Sell");
+                .getReference("Sellit/Items");
 
-
+        //get data
         mDatabaseReference.addValueEventListener(new ValueEventListener() {
-            //get data
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) { //dataSnapshot is a List containing our data
                 for(DataSnapshot postSnapshot : dataSnapshot.getChildren()){
                     Item item = postSnapshot.getValue(Item.class);
-                    mUploads.add(item);
+                    if(!item.getUser_id().equals(id)) {
+                        mUploads.add(item);
+                   }
                 }
-                mAdapter = new ImageAdapter(BuyerActivity.this, mUploads);
-                mRecyclerView.setAdapter(mAdapter);
+                //update adapter
+                mAdapter.setContext(BuyerActivity.this);
+                mAdapter.setItems(mUploads);
 
+                //set RecyclerView with updated adapter
+                mRecyclerView.setAdapter(mAdapter);
             }
 
             //When we don't have permission to access the data
