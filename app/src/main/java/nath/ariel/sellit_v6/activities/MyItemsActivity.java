@@ -26,8 +26,8 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 import java.util.List;
 
-import classes.ImageAdapter;
 import classes.Item;
+import classes.MyImageAdapter;
 import nath.ariel.sellit_v6.R;
 import nath.ariel.sellit_v6.databinding.ActivityMyitemsBinding;
 
@@ -42,7 +42,7 @@ public class MyItemsActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
 
     //Adapter
-    private ImageAdapter mAdapter;
+    private MyImageAdapter mAdapter;
 
     //Items List
     private List<Item> mUploads;
@@ -81,7 +81,7 @@ public class MyItemsActivity extends AppCompatActivity {
         binding.nameTvMyItems.setText(name);
 
         //RecyclerView Initialisation + Settings
-        mRecyclerView = binding.recylcerView;
+        mRecyclerView = binding.recyclerViewMyItems;
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -101,7 +101,7 @@ public class MyItemsActivity extends AppCompatActivity {
                         mUploads.add(item);
                     }
                 }
-                mAdapter = new ImageAdapter(MyItemsActivity.this, mUploads);
+                mAdapter = new MyImageAdapter(MyItemsActivity.this, mUploads);
                 mRecyclerView.setAdapter(mAdapter);
 
             }

@@ -62,7 +62,7 @@
         app:layout_constraintTop_toBottomOf="@+id/nameTvMyItems">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recylcer_view"
+            android:id="@+id/recycler_view_MyItems"
             android:layout_width="match_parent"
             android:layout_height="527dp" />
 

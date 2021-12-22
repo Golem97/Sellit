@@ -203,6 +203,7 @@ public class SellerActivity extends AppCompatActivity {
                                     //upload to realtime database
                                     //get items infos
                                     String id = firebaseAuth.getUid();
+
                                     String name = String.valueOf(binding.productTitle.getText());
                                     String descript = String.valueOf(binding.descript.getText());
                                     double price = Integer.parseInt(binding.price.getText().toString());
@@ -210,9 +211,15 @@ public class SellerActivity extends AppCompatActivity {
                                     //create item
                                     Item item = new Item(id, name, descript, price, true, downloadUrl);
 
-                                    //upload
+                                    //push it and save item_id
                                     String uploadId = database.child("Items").push().getKey();
-                                    System.out.println("\n\n uploadId =" + uploadId + "\n\n");
+                                    //set item id
+                                    item.setItem_id(uploadId);
+
+                                    //check item id
+                                    Log.d(TAG, "uploadId = "+item.getItem_id());
+
+                                    //set value with item attributes
                                     database.child("Items").child(uploadId).setValue(item);
 
                                     Toast.makeText(SellerActivity.this, "Upload successful", Toast.LENGTH_LONG).show();

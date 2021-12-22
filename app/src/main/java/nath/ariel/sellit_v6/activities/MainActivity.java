@@ -31,6 +31,13 @@ import nath.ariel.sellit_v6.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
+    //TODO: notifications
+    //TODO: Delete
+    //TODO: diroug
+    //TODO:transactions
+    //TODO: Chat
+    //TODO: User admin
+
     //view binding
     private ActivityMainBinding binding ;
     private static final int RC_SIGN_IN =100;

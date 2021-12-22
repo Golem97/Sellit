@@ -2,11 +2,14 @@ package classes;
 
 import android.net.Uri;
 
+import com.google.firebase.database.Exclude;
+
 /**
  * Created by Jordan Perez on 15/12/2021
  */
 public class Item {
 
+    private String item_id;
     private String user_id;
     private String name;
     private String description;
@@ -20,6 +23,7 @@ public class Item {
 
     //Constructor
     public Item(String user_id, String name, String description, double price, boolean available, String photoUrl) {
+        this.item_id="";
         this.user_id = user_id;
         this.name = name;
         this.description = description;
@@ -57,9 +61,7 @@ public class Item {
         return price;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
+    public void setPrice(double price) { this.price = price; }
 
     public boolean isAvailable() {
         return available;
@@ -75,5 +77,13 @@ public class Item {
 
     public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
+    }
+
+    public String getItem_id() {
+        return item_id;
+    }
+
+    public void setItem_id(String item_id) {
+        this.item_id = item_id;
     }
 }

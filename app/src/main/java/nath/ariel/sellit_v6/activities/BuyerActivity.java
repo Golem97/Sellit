@@ -83,7 +83,7 @@ public class BuyerActivity extends AppCompatActivity {
         binding.nameTvBuyer.setText(name);
 
         //RecyclerView Initialisation + Settings
-        mRecyclerView = binding.recylcerView;
+        mRecyclerView = binding.recyclerViewBuyer;
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
