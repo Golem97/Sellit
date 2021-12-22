@@ -25,7 +25,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-
+import com.google.firebase.database.DatabaseReference;
+import classes.User;
 import nath.ariel.sellit_v6.R;
 import nath.ariel.sellit_v6.databinding.ActivityMainBinding;
 
@@ -45,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
     private GoogleSignInClient googleSignInClient;
     private FirebaseAuth firebaseAuth ;
     private static final String TAG ="GOOGLE_SIGN_IN_TAG";
+
+    private boolean isAdmin=false;
+    private DatabaseReference usersPathDatabase;
 
 
     @Override
@@ -68,8 +72,11 @@ public class MainActivity extends AppCompatActivity {
 
         //init firebase auth
         firebaseAuth = FirebaseAuth.getInstance();
-        checkUser();
 
+        // Checks if User exists
+        // if he does, it determines if its an admin or a customer and set global variable isAdmin accordingly
+        // plus, if he exists, it redirects him to the proper activity
+        checkUser();
 
         //Google Sign In btn
         binding.googleSignInBtn.setOnClickListener(new View.OnClickListener() {
@@ -89,11 +96,12 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         if (firebaseUser!=null){
             Log.d(TAG, "checkUser: Already logged in ");
-            startActivity(new Intent(this, ProfileActivity.class));
-            finish();
-        }
 
+                startActivity(new Intent(this, TempActivity.class));
+                finish();
+        }
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -106,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                 //Identify with success , now auth with firebase
                 GoogleSignInAccount account = accountTask.getResult(ApiException.class);
                 firebaseAuthWithGoogleAccount(account);
-                
+
             }
             catch (Exception e){
                 Log.d(TAG, "onActivityResult: "+e.getMessage());
@@ -123,32 +131,40 @@ public class MainActivity extends AppCompatActivity {
                     public void onSuccess(AuthResult authResult) {
                         //loginSuccess
                         Log.d(TAG, "onSuccess: Logged  In");
+
+                        //Get User
                         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                        //get  User Info
-                        String uid = firebaseUser.getUid();
+
+                        //Get User's mail
                         String email = firebaseUser.getEmail();
-                        Uri profilePic = firebaseUser.getPhotoUrl();
-                        String name = firebaseUser.getDisplayName();
 
-                        Log.d(TAG, "onSuccess: Email "+email);
-                        Log.d(TAG, "onSuccess: Uid "+uid);
                         //check if user is new or existing
-
                         if (authResult.getAdditionalUserInfo().isNewUser()){
-                            //User is new : create new account
+
+                            //get User Informations
+                            String uid = firebaseUser.getUid();
+                            Uri profilePic = firebaseUser.getPhotoUrl();
+                            String name = firebaseUser.getDisplayName();
+
+                            //Create User
+                            User user = new User(uid,name,profilePic,email);
+
+                            //add him to database
+                            usersPathDatabase.child(uid).setValue(user);
+                            //TODO: Treat redundant infos ?
+
                             Log.d(TAG, "onSuccess: Account Created");
                             Toast.makeText(MainActivity.this, "Account created ..\n"+email, Toast.LENGTH_SHORT).show();
                         }
                         else {
-                            //existing User _Logged In
+                            //existing User
                             Log.d(TAG, "onSuccess: Existing User ..."+email);
                             Toast.makeText(MainActivity.this, "Existing User ..\n"+email, Toast.LENGTH_SHORT).show();
-
                         }
 
-                        //Start profil Activity
-                        startActivity(new Intent(MainActivity.this , ProfileActivity.class));
+                        startActivity(new Intent(MainActivity.this , TempActivity.class));
                         finish();
+
 
                     }
                 })

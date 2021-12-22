@@ -8,18 +8,18 @@
     android:layout_gravity="center"
     android:layout_height="match_parent"
     android:background="@drawable/topblue"
-    tools:context=".activities.ProfileActivity">
+    tools:context=".activities.TempActivity">
 
 
     <TextView
-        android:id="@+id/textMailCustomer"
+        android:id="@+id/textMailTemp"
         style="@style/MaterialAlertDialog.MaterialComponents.Title.Icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
         android:text="Mail: "
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/emailTv"
+        app:layout_constraintEnd_toStartOf="@+id/emailTvTemp"
         app:layout_constraintHorizontal_bias="0.352"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -40,10 +40,10 @@
         app:layout_constraintVertical_bias="0.024" />
 
     <Button
-        android:id="@+id/buyBtnCustomer"
+        android:id="@+id/CustomerBtn"
         android:layout_width="158dp"
         android:layout_height="54dp"
-        android:text="Buy"
+        android:text="Customer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.102"
@@ -53,33 +53,20 @@
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/SellBtnCustomer"
+        android:id="@+id/AdminBtn"
         android:layout_width="158dp"
         android:layout_height="54dp"
-        android:text="Sell"
+        android:text="Admin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.188"
-        app:layout_constraintStart_toEndOf="@+id/buyBtnCustomer"
+        app:layout_constraintStart_toEndOf="@+id/CustomerBtn"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.788"
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/myItemsBtnCustomer"
-        android:layout_width="158dp"
-        android:layout_height="54dp"
-        android:text="MY ITEMS"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.098"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.367"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/logoutBtnCustomer"
+        android:id="@+id/logoutBtnTemp"
         android:layout_width="174dp"
         android:layout_height="48dp"
         android:text="Logout"
@@ -87,12 +74,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SellBtnCustomer"
+        app:layout_constraintTop_toBottomOf="@+id/CustomerBtn"
         app:layout_constraintVertical_bias="0.896"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/emailTv"
+        android:id="@+id/emailTvTemp"
         style="@style/MaterialAlertDialog.MaterialComponents.Title.Icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -107,7 +94,7 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/nameTvCustomer"
+        android:id="@+id/nameTvTemp"
         style="@style/MaterialAlertDialog.MaterialComponents.Title.Icon"
         android:layout_width="111dp"
         android:layout_height="34dp"
@@ -116,12 +103,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/customerImageView"
+        app:layout_constraintTop_toBottomOf="@+id/TempImageView"
         app:layout_constraintVertical_bias="0.025"
         tools:ignore="MissingConstraints" />
 
     <ImageView
-        android:id="@+id/customerImageView"
+        android:id="@+id/TempImageView"
         android:layout_width="74dp"
         android:layout_height="75dp"
         app:layout_constraintBottom_toBottomOf="parent"

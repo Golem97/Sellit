@@ -22,16 +22,8 @@ public class User {
     private Uri profilePicture; //obtained by signing in to Google
     private String email; //obtained by signing in to Google
 
-    //TODO: ItemsList
-    //private List<Item> sellHistory;
-    private List<Item> forSell;
-    //private List<Item> buyHistory;
-    //private List<Item> wishlist;
     //TODO: Chats
     //private Chat<Messages> chat;
-
-
-    private String address = "";
 
 
     /*********** CONSTRUCTORS ***********/
@@ -82,13 +74,5 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 }

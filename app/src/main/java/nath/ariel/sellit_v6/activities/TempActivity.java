@@ -1,7 +1,5 @@
 package nath.ariel.sellit_v6.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
@@ -9,34 +7,38 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import nath.ariel.sellit_v6.databinding.ActivityProfileBinding;
+import nath.ariel.sellit_v6.databinding.ActivityTempBinding;
 
-public class ProfileActivity extends AppCompatActivity {
+/**
+ * Created by Jordan Perez on 23/12/2021
+ */
+public class TempActivity extends AppCompatActivity {
 
     //view  Binding
-    private ActivityProfileBinding binding ;
+    private ActivityTempBinding binding ;
 
     private FirebaseAuth firebaseAuth;
-    private static final String TAG ="PROFILE_ACTIVITY_TAG";
+    private static final String TAG ="TEMP_ACTIVITY_TAG";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         //binding to layout
-        binding = ActivityProfileBinding.inflate(getLayoutInflater());
+        binding = ActivityTempBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
 
         //Disable Landscape Mode
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
 
         //init firebase auth
         firebaseAuth = FirebaseAuth.getInstance();
@@ -47,7 +49,7 @@ public class ProfileActivity extends AppCompatActivity {
         Log.d(TAG, "checkUser() successful");
 
         //handle click on logout button
-        binding.logoutBtnCustomer.setOnClickListener(new View.OnClickListener() {
+        binding.logoutBtnTemp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 firebaseAuth.signOut();
@@ -55,32 +57,24 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        //handle click on seller button
-        binding.SellBtnCustomer.setOnClickListener(new View.OnClickListener() {
+        //handle click on Customer button
+        binding.CustomerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 Intent intent = new Intent(getApplicationContext(), SellerActivity.class);
-                 startActivity(intent);
-            }
-        });
-
-        //handle click on buyer button
-        binding.buyBtnCustomer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), BuyerActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
                 startActivity(intent);
             }
         });
 
-        //handle click on myItems button
-        binding.myItemsBtnCustomer.setOnClickListener(new View.OnClickListener() {
+        //handle click on Admin button
+        binding.AdminBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MyItemsActivity.class);
+                Intent intent = new Intent(getApplicationContext(), AdminActivity.class);
                 startActivity(intent);
             }
         });
+
     }
 
     private void checkUser() {
@@ -98,11 +92,11 @@ public class ProfileActivity extends AppCompatActivity {
             //user already logged in
             //get user info
             String email = firebaseUser.getEmail();
-            binding.emailTv.setText(email);
+            binding.emailTvTemp.setText(email);
 
             //set Username
             String name = firebaseUser.getDisplayName();
-            binding.nameTvCustomer.setText(name);
+            binding.nameTvTemp.setText(name);
 
             //gets profile picture from google and displays it using Glide
             setProfilePicture(firebaseUser.getPhotoUrl());
@@ -113,6 +107,7 @@ public class ProfileActivity extends AppCompatActivity {
         Glide.with(this)
                 .load(profilePictureUrl)
                 .apply(RequestOptions.circleCropTransform())
-                .into(binding.customerImageView);
+                .into(binding.TempImageView);
     }
+
 }

@@ -199,9 +199,10 @@ public class SellerActivity extends AppCompatActivity {
                             task.addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
-                                    String downloadUrl = uri.toString();
                                     //upload to realtime database
                                     //get items infos
+
+                                    String downloadUrl = uri.toString();
                                     String id = firebaseAuth.getUid();
 
                                     String name = String.valueOf(binding.productTitle.getText());
@@ -212,15 +213,16 @@ public class SellerActivity extends AppCompatActivity {
                                     Item item = new Item(id, name, descript, price, true, downloadUrl);
 
                                     //push it and save item_id
-                                    String uploadId = database.child("Items").push().getKey();
+                                    String itemId = database.child("Items").push().getKey();
+
                                     //set item id
-                                    item.setItem_id(uploadId);
+                                    item.setItem_id(itemId);
 
                                     //check item id
                                     Log.d(TAG, "uploadId = "+item.getItem_id());
 
                                     //set value with item attributes
-                                    database.child("Items").child(uploadId).setValue(item);
+                                    database.child("Items").child(itemId).setValue(item);
 
                                     Toast.makeText(SellerActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
 
