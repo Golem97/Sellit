@@ -122,19 +122,7 @@
         app:layout_constraintVertical_bias="0.262"
         tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/nameTvAdmin"
-        style="@style/MaterialAlertDialog.MaterialComponents.Title.Icon"
-        android:layout_width="111dp"
-        android:layout_height="34dp"
-        android:text="Username"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AdminImageView"
-        app:layout_constraintVertical_bias="0.025"
-        tools:ignore="MissingConstraints" />
+
 
     <ImageView
         android:id="@+id/AdminImageView"
@@ -142,10 +130,25 @@
         android:layout_height="75dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.881"
+        app:layout_constraintHorizontal_bias="0.8"
         app:layout_constraintStart_toEndOf="@+id/chatIcon"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.024"
+        app:layout_constraintVertical_bias="0.042"
         app:srcCompat="@drawable/ic_anon_user_48dp" />
+
+    <TextView
+        android:id="@+id/nameTvAdmin"
+        style="@style/MaterialAlertDialog.MaterialComponents.Title.Icon"
+        android:layout_width="111dp"
+        android:layout_height="34dp"
+        android:text="Username"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/AdminImageView"
+        app:layout_constraintHorizontal_bias="0.521"
+        app:layout_constraintStart_toStartOf="@+id/AdminImageView"
+        app:layout_constraintTop_toBottomOf="@+id/AdminImageView"
+        app:layout_constraintVertical_bias="0.001"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

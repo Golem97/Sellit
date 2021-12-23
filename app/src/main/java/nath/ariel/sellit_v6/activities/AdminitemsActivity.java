@@ -1,6 +1,7 @@
 package nath.ariel.sellit_v6.activities;
 
 import android.content.pm.ActivityInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -11,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -72,7 +75,7 @@ public class AdminitemsActivity extends AppCompatActivity {
         String id = firebaseAuth.getUid();
 
         //set profile picture
-        //setProfilePicture(firebaseUser.getPhotoUrl());
+        setProfilePicture(firebaseUser.getPhotoUrl());
 
         //set Username
         String name = firebaseUser.getDisplayName();
@@ -108,12 +111,10 @@ public class AdminitemsActivity extends AppCompatActivity {
             }
         });
     }
-
-    //TODO: profile pic
-//    private void setProfilePicture(Uri profilePictureUrl) {
-//        Glide.with(this)
-//                .load(profilePictureUrl)
-//                .apply(RequestOptions.circleCropTransform())
-//                .into(binding.profileImageMyItems);
-//    }
+        private void setProfilePicture(Uri profilePictureUrl) {
+        Glide.with(this)
+                .load(profilePictureUrl)
+                .apply(RequestOptions.circleCropTransform())
+                .into(binding.profileAdminItems);
+    }
 }

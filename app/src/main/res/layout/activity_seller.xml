@@ -10,15 +10,13 @@
     <TextView
         android:id="@+id/nameTvSeller"
         style="@style/MaterialAlertDialog.MaterialComponents.Title.Icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="111dp"
+        android:layout_height="34dp"
+        android:textAlignment="center"
         android:text="@string/username"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.89"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/profileImageSeller"
+        app:layout_constraintStart_toStartOf="@+id/profileImageSeller"
         app:layout_constraintTop_toBottomOf="@+id/profileImageSeller"
-        app:layout_constraintVertical_bias="0.01999998"
         tools:ignore="MissingConstraints" />
 
     <ImageView

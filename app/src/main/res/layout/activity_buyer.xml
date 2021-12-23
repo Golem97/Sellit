@@ -8,32 +8,32 @@
     tools:context=".activities.BuyerActivity">
 
 
-    <TextView
-        android:id="@+id/nameTvBuyer"
-        style="@style/MaterialAlertDialog.MaterialComponents.Title.Icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="11dp"
-        android:layout_marginBottom="29dp"
-        android:text="@string/username"
-        app:layout_constraintBottom_toTopOf="@+id/relativeLayoutBuyer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.88"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileImageBuyer"
-        tools:ignore="MissingConstraints" />
-
     <ImageView
         android:id="@+id/profileImageBuyer"
         android:layout_width="74dp"
         android:layout_height="75dp"
-        android:layout_marginTop="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/nameTvBuyer"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.857"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toEndOf="@+id/chatIconBuyer"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.042"
         app:srcCompat="@drawable/ic_anon_user_48dp" />
+
+    <TextView
+        android:id="@+id/nameTvBuyer"
+        style="@style/MaterialAlertDialog.MaterialComponents.Title.Icon"
+        android:layout_width="111dp"
+        android:layout_height="34dp"
+        android:text="Username"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/profileImageBuyer"
+        app:layout_constraintHorizontal_bias="0.521"
+        app:layout_constraintStart_toStartOf="@+id/profileImageBuyer"
+        app:layout_constraintTop_toBottomOf="@+id/profileImageBuyer"
+        app:layout_constraintVertical_bias="0.001"
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/chatIconBuyer"
