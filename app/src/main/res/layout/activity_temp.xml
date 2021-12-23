@@ -57,11 +57,11 @@
         android:id="@+id/AdminBtn"
         android:layout_width="158dp"
         android:layout_height="54dp"
-        android:layout_marginEnd="112dp"
         android:enabled="false"
         android:text="Admin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.677"
         tools:ignore="MissingConstraints" />
@@ -77,6 +77,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.777"
+        android:textAlignment="center"
         tools:ignore="MissingConstraints" />
 
     <Button
