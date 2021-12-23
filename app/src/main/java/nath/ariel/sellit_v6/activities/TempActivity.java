@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -71,6 +72,8 @@ public class TempActivity extends AppCompatActivity {
             }
         });
 
+        //hidden password
+        binding.passwordAdmin.setTransformationMethod(new PasswordTransformationMethod());
 
         //require password to get into admin activity
         binding.passwordAdmin.addTextChangedListener(mTextWatcher);
@@ -92,8 +95,6 @@ public class TempActivity extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 
     //check if there are no empty field and if entered price is an int
