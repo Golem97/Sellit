@@ -95,13 +95,10 @@ public class AdminitemsActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) { //dataSnapshot is a List containing our data
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Item item = postSnapshot.getValue(Item.class);
-                    if (item.getUser_id().equals(id)) {
                         mUploads.add(item);
-                    }
                 }
                 mAdapter = new AdminImageAdapter(AdminitemsActivity.this, mUploads);
                 mRecyclerView.setAdapter(mAdapter);
-
             }
 
             //When we don't have permission to access the data
