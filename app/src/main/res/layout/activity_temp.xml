@@ -46,23 +46,37 @@
         android:text="Customer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.102"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.788"
+        app:layout_constraintVertical_bias="0.463"
         tools:ignore="MissingConstraints" />
+
 
     <Button
         android:id="@+id/AdminBtn"
         android:layout_width="158dp"
         android:layout_height="54dp"
+        android:layout_marginEnd="112dp"
+        android:enabled="false"
         android:text="Admin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.188"
-        app:layout_constraintStart_toEndOf="@+id/CustomerBtn"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.788"
+        app:layout_constraintVertical_bias="0.677"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/passwordAdmin"
+        android:layout_width="294dp"
+        android:layout_height="48dp"
+        android:hint="Enter Admin Password"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.427"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.777"
         tools:ignore="MissingConstraints" />
 
     <Button

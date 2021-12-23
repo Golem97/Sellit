@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +24,8 @@ import nath.ariel.sellit_v6.databinding.ActivityTempBinding;
  * Created by Jordan Perez on 23/12/2021
  */
 public class TempActivity extends AppCompatActivity {
+
+    private static final String PASSWORD = "abcd";
 
     //view  Binding
     private ActivityTempBinding binding ;
@@ -66,16 +71,48 @@ public class TempActivity extends AppCompatActivity {
             }
         });
 
+
+        //require password to get into admin activity
+        binding.passwordAdmin.addTextChangedListener(mTextWatcher);
+
         //handle click on Admin button
         binding.AdminBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AdminActivity.class);
-                startActivity(intent);
+
+                if(binding.passwordAdmin.getText().toString().trim().equals(PASSWORD)){
+                    Toast.makeText(TempActivity.this, "Password Correct", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), AdminActivity.class);
+                    startActivity(intent);
+                }
+                else{
+                    //Toast.makeText(TempActivity.this, "Password Incorrect", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TempActivity.this, "Password incorrect", Toast.LENGTH_SHORT).show();
+
+                }
             }
         });
 
+
     }
+
+    //check if there are no empty field and if entered price is an int
+    private TextWatcher mTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            String mPassword = binding.passwordAdmin.getText().toString().trim();
+            binding.AdminBtn.setEnabled(!mPassword.isEmpty());
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+        }
+    };
 
     private void checkUser() {
         //get current user
