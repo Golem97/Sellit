@@ -68,20 +68,11 @@ public class AdminActivity extends AppCompatActivity {
         });
 
         //handle click on users button
-        binding.usersBtnAdmin.setOnClickListener(new View.OnClickListener() {
+        binding.manageBtnAdmin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(getApplicationContext(), BuyerActivity.class);
-//                startActivity(intent);
-            }
-        });
-
-        //handle click on manage button
-        binding.manageTransactions.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Intent intent = new Intent(getApplicationContext(), MyItemsActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(getApplicationContext(), ManageusersActivity.class);
+                startActivity(intent);
             }
         });
     }

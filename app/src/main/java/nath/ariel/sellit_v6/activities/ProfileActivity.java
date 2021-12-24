@@ -1,5 +1,6 @@
 package nath.ariel.sellit_v6.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -14,7 +15,13 @@ import com.bumptech.glide.request.RequestOptions;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import classes.User;
 import nath.ariel.sellit_v6.databinding.ActivityProfileBinding;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -24,6 +31,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
     private static final String TAG ="PROFILE_ACTIVITY_TAG";
+    private DatabaseReference mDatabaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +103,26 @@ public class ProfileActivity extends AppCompatActivity {
             finish();
         }
         else{
+
+            mDatabaseReference = FirebaseDatabase.getInstance("https://sell-86b95-default-rtdb.europe-west1.firebasedatabase.app")
+                    .getReference("Sellit/Users");
+
+            mDatabaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                    String balance = String.valueOf(snapshot.getValue(User.class).getBalance());
+
+                    binding.userBalance.setText(balance);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+
             //user already logged in
             //get user info
             String email = firebaseUser.getEmail();

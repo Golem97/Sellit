@@ -69,29 +69,16 @@
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/usersBtnAdmin"
+        android:id="@+id/manageBtnAdmin"
         android:layout_width="158dp"
         android:layout_height="54dp"
-        android:text="USERS"
+        android:text="MANAGE"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.188"
         app:layout_constraintStart_toEndOf="@+id/itemsBtnAdmin"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.788"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/manageTransactions"
-        android:layout_width="158dp"
-        android:layout_height="54dp"
-        android:text="Manage"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.098"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.367"
         tools:ignore="MissingConstraints" />
 
     <Button
@@ -103,7 +90,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usersBtnAdmin"
+        app:layout_constraintTop_toBottomOf="@+id/manageBtnAdmin"
         app:layout_constraintVertical_bias="0.896"
         tools:ignore="MissingConstraints" />
 

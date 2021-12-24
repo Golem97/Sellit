@@ -21,9 +21,11 @@ public class User {
     private String name; //obtained by signing in to Google
     private String profilePicture; //obtained by signing in to Google
     private String email; //obtained by signing in to Google
+    private double balance;
 
     //TODO: Chats
     //private Chat<Messages> chat;
+
 
 
     /*********** CONSTRUCTORS ***********/
@@ -32,11 +34,12 @@ public class User {
     public User(){};
 
     //Constructor
-    public User(String userId, String name, String profilePicture, String email) {
+    public User(String userId, String name, String profilePicture, String email, double balance) {
         this.userId = userId;
         this.name = name;
         this.profilePicture = profilePicture;
         this.email = email;
+        this.balance = balance;
     }
 
     /*********** METHODS ***********/
@@ -74,5 +77,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 }
