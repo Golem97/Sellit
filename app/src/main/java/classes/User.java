@@ -19,7 +19,7 @@ public class User {
 
     private String userId; //obtained by signing in to Google
     private String name; //obtained by signing in to Google
-    private Uri profilePicture; //obtained by signing in to Google
+    private String profilePicture; //obtained by signing in to Google
     private String email; //obtained by signing in to Google
 
     //TODO: Chats
@@ -32,7 +32,7 @@ public class User {
     public User(){};
 
     //Constructor
-    public User(String userId, String name, Uri profilePicture, String email) {
+    public User(String userId, String name, String profilePicture, String email) {
         this.userId = userId;
         this.name = name;
         this.profilePicture = profilePicture;
@@ -60,11 +60,11 @@ public class User {
         this.name = name;
     }
 
-    public Uri getProfilePicture() {
+    public String getProfilePicture() {
         return profilePicture;
     }
 
-    public void setProfilePicture(Uri profilePicture) {
+    public void setProfilePicture(String profilePicture) {
         this.profilePicture = profilePicture;
     }
 

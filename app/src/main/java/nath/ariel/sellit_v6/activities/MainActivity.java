@@ -25,7 +25,12 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import classes.User;
 import nath.ariel.sellit_v6.R;
 import nath.ariel.sellit_v6.databinding.ActivityMainBinding;
@@ -143,15 +148,17 @@ public class MainActivity extends AppCompatActivity {
 
                             //get User Informations
                             String uid = firebaseUser.getUid();
-                            Uri profilePic = firebaseUser.getPhotoUrl();
+                            String profilePic = firebaseUser.getPhotoUrl().toString();
                             String name = firebaseUser.getDisplayName();
 
                             //Create User
                             User user = new User(uid,name,profilePic,email);
 
-                            //add him to database
-                            usersPathDatabase.child(uid).setValue(user);
-                            //TODO: Treat redundant infos ?
+                            usersPathDatabase = FirebaseDatabase.getInstance("https://sell-86b95-default-rtdb.europe-west1.firebasedatabase.app")
+                                    .getReference("Sellit").child("Users");
+
+                            usersPathDatabase.push().setValue(user);
+
 
                             Log.d(TAG, "onSuccess: Account Created");
                             Toast.makeText(MainActivity.this, "Account created ..\n"+email, Toast.LENGTH_SHORT).show();
@@ -176,6 +183,5 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
-
 
 }
