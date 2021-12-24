@@ -31,7 +31,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
     private static final String TAG ="PROFILE_ACTIVITY_TAG";
-    private DatabaseReference mDatabaseReference;
+    private DatabaseReference balanceUserReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,16 +104,16 @@ public class ProfileActivity extends AppCompatActivity {
         }
         else{
 
-            mDatabaseReference = FirebaseDatabase.getInstance("https://sell-86b95-default-rtdb.europe-west1.firebasedatabase.app")
-                    .getReference("Sellit/Users");
+            balanceUserReference = FirebaseDatabase.getInstance("https://sell-86b95-default-rtdb.europe-west1.firebasedatabase.app")
+                    .getReference("Sellit/Users/"+firebaseUser.getUid()+"/balance");
 
-            mDatabaseReference.addValueEventListener(new ValueEventListener() {
+            balanceUserReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                    String balance = String.valueOf(snapshot.getValue(User.class).getBalance());
-
-                    binding.userBalance.setText(balance);
+                    //String balance = String.valueOf(snapshot.getValue(User.class).getBalance());
+                    String bal = String.valueOf(snapshot.getValue());
+                    binding.userBalance.setText(bal);
                 }
 
                 @Override

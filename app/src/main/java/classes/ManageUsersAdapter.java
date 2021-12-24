@@ -104,20 +104,29 @@ public class ManageUsersAdapter extends RecyclerView.Adapter<ManageUsersAdapter.
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        User user = dataSnapshot.getValue(User.class);
-                        double currentBalance = user.getBalance();
+                        String currentBalance = String.valueOf(dataSnapshot.getValue());
+
 
                         String addedBalance = holder.textEnterBalance.getText().toString().trim();
-                        double bal = Double.parseDouble(addedBalance);
-                        double updatedBalance = currentBalance - bal;
+                        double updatedBalance = Double.parseDouble(currentBalance);
 
-                        if (updatedBalance < 0 ){
-                            Toast.makeText(mContext, "User has insufficient balance", Toast.LENGTH_SHORT).show();
-                        }
-                        else{
-                            dataSnapshot.getValue(User.class).setBalance(updatedBalance);
-                            Toast.makeText(mContext, "Balance Updated", Toast.LENGTH_SHORT).show();
-                        }
+                        double bal = Double.parseDouble(currentBalance);
+                        //double updatedBalance = currentBalance - bal;
+
+//                        if (updatedBalance < 0 ){
+//                            Toast.makeText(mContext, "User has insufficient balance", Toast.LENGTH_SHORT).show();
+//                        }
+//                        else{
+
+                        User user = dataSnapshot.getValue(User.class);
+                        user.setBalance(updatedBalance);
+                        userRef.updateChildren(curentUser.getUserId().toString(), user);
+                        //userRef.updateChildren("balance",updatedBalance);
+                            //dataSnapshot(updatedBalance);
+                        Toast.makeText(mContext, "datasnapshot value = "+dataSnapshot.getValue().toString(), Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(mContext, "userRef = "+userRef.toString(), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(mContext, "Balance Updated", Toast.LENGTH_SHORT).show();
+//                        }
                     }
 
                     @Override

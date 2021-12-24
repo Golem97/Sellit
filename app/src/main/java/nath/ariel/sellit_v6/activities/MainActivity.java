@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
                             usersPathDatabase = FirebaseDatabase.getInstance("https://sell-86b95-default-rtdb.europe-west1.firebasedatabase.app")
                                     .getReference("Sellit").child("Users");
 
-                            usersPathDatabase.push().setValue(user);
+                            usersPathDatabase.child(uid).setValue(user);
 
 
                             Log.d(TAG, "onSuccess: Account Created");
