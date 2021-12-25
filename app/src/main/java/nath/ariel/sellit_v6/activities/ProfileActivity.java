@@ -89,6 +89,15 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        //handle click on messages button
+        binding.chatIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MyItemsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void checkUser() {
