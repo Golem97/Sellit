@@ -1,9 +1,11 @@
 package nath.ariel.sellit_v6.activities;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -96,15 +98,19 @@ public class ManageusersActivity extends AppCompatActivity {
 
 
         mDatabaseReference.addValueEventListener(new ValueEventListener() {
-            //get data
+            //display all users
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) { //dataSnapshot is a List containing our data
+                mUploads.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     User user = postSnapshot.getValue(User.class);
                     mUploads.add(user);
                 }
+
                 mAdapter = new ManageUsersAdapter(ManageusersActivity.this, mUploads);
+                mAdapter.notifyDataSetChanged();
                 mRecyclerView.setAdapter(mAdapter);
+
             }
 
             //When we don't have permission to access the data
@@ -113,11 +119,14 @@ public class ManageusersActivity extends AppCompatActivity {
                 Toast.makeText(ManageusersActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
     }
+
     private void setProfilePicture(Uri profilePictureUrl) {
         Glide.with(this)
                 .load(profilePictureUrl)
                 .apply(RequestOptions.circleCropTransform())
                 .into(binding.profileImageManage);
     }
+
 }

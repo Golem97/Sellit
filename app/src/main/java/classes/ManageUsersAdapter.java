@@ -15,9 +15,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,6 +31,8 @@ import java.util.List;
 
 import nath.ariel.sellit_v6.R;
 import nath.ariel.sellit_v6.activities.AdminActivity;
+import nath.ariel.sellit_v6.activities.MainActivity;
+import nath.ariel.sellit_v6.activities.ManageusersActivity;
 
 /**
  * Created by Jordan Perez on 24/12/2021
@@ -88,53 +92,25 @@ public class ManageUsersAdapter extends RecyclerView.Adapter<ManageUsersAdapter.
             public void afterTextChanged(Editable editable) {
             }
         };
-
+        //link editText button to mWatcher so button "change balance" can detect if it's not empty and then
+        // recognize if it has to be activated
         holder.textEnterBalance.addTextChangedListener(mTextWatcher);
 
+        //update user balance
         holder.changeBalanceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                //get ref
                 userRef = FirebaseDatabase.getInstance("https://sell-86b95-default-rtdb.europe-west1.firebasedatabase.app")
                         .getReference("Sellit/Users/"+curentUser.getUserId());
-                //TODO: update user balance
 
-                // Attach a listener to read the data at our posts reference
-                userRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
+                String updatedBalanceString = holder.textEnterBalance.getText().toString().trim();
+                double bal = Double.parseDouble(updatedBalanceString);
 
-                        String currentBalance = String.valueOf(dataSnapshot.getValue());
-
-
-                        String addedBalance = holder.textEnterBalance.getText().toString().trim();
-                        double updatedBalance = Double.parseDouble(currentBalance);
-
-                        double bal = Double.parseDouble(currentBalance);
-                        //double updatedBalance = currentBalance - bal;
-
-//                        if (updatedBalance < 0 ){
-//                            Toast.makeText(mContext, "User has insufficient balance", Toast.LENGTH_SHORT).show();
-//                        }
-//                        else{
-
-                        User user = dataSnapshot.getValue(User.class);
-                        user.setBalance(updatedBalance);
-                        userRef.updateChildren(curentUser.getUserId().toString(), user);
-                        //userRef.updateChildren("balance",updatedBalance);
-                            //dataSnapshot(updatedBalance);
-                        Toast.makeText(mContext, "datasnapshot value = "+dataSnapshot.getValue().toString(), Toast.LENGTH_SHORT).show();
-                       // Toast.makeText(mContext, "userRef = "+userRef.toString(), Toast.LENGTH_SHORT).show();
-                            //Toast.makeText(mContext, "Balance Updated", Toast.LENGTH_SHORT).show();
-//                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        System.out.println("The read failed: " + databaseError.getCode());
-                    }
-                });
-
+                //update user's balance in database
+                userRef.child("balance").setValue(bal);
+                Toast.makeText(mContext, "Balance Updated", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -157,7 +133,7 @@ public class ManageUsersAdapter extends RecyclerView.Adapter<ManageUsersAdapter.
                                 userRef = FirebaseDatabase.getInstance("https://sell-86b95-default-rtdb.europe-west1.firebasedatabase.app")
                                         .getReference("Sellit/Users/"+curentUser.getUserId());
 
-                                //TODO: delete all user's items??
+                                //TODO: delete all user's items?? or change data structure (items under users)
 
                                 //delete user from realtime database
                                 userRef.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
