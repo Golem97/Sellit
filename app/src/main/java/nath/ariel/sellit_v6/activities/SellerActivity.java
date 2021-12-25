@@ -175,9 +175,12 @@ public class SellerActivity extends AppCompatActivity {
     };
 
     private void uploadFile() {
+
+        String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
         if (imageUrl != null) {
             long picId = System.currentTimeMillis();
-            StorageReference fileReference = storage.child("Items").child(picId
+            StorageReference fileReference = storage.child("Items").child(user_id).child(picId
                     + "." + getFileExtension(imageUrl));
 
             //upload to storage
@@ -209,8 +212,11 @@ public class SellerActivity extends AppCompatActivity {
                                     String descript = String.valueOf(binding.descript.getText());
                                     double price = Integer.parseInt(binding.price.getText().toString());
 
+                                    //set storageId
+                                    String storageId = String.format("%d.%s", picId, getFileExtension(imageUrl));
+
                                     //create item
-                                    Item item = new Item(id, name, descript, price, true, downloadUrl);
+                                    Item item = new Item(id, name, descript, price, true, downloadUrl, storageId);
 
                                     //push it and save item_id
                                     String itemId = database.child("Items").push().getKey();

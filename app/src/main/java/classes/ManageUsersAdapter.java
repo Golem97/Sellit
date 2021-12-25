@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
@@ -39,11 +41,15 @@ import nath.ariel.sellit_v6.activities.ManageusersActivity;
  */
 public class ManageUsersAdapter extends RecyclerView.Adapter<ManageUsersAdapter.ImageViewHolder>{
 
+    //TAG
+    private static final String TAG = "MANAGE_ADAPTER_IN_TAG";
+
     private Context mContext; //activity
     private List<User> mUsers; // list of items
 
     private StorageReference storedImage;
     private DatabaseReference userRef;
+    private DatabaseReference itemRef;
 
     //constructor
     public ManageUsersAdapter(Context context, List<User> users) {
@@ -75,6 +81,14 @@ public class ManageUsersAdapter extends RecyclerView.Adapter<ManageUsersAdapter.
         holder.textViewBalance.setText("Balance: "+(balance) + " $");
 
 
+        //get user reference
+        userRef = FirebaseDatabase.getInstance("https://sell-86b95-default-rtdb.europe-west1.firebasedatabase.app")
+                .getReference("Sellit/Users/"+curentUser.getUserId());
+
+        itemRef = FirebaseDatabase.getInstance("https://sell-86b95-default-rtdb.europe-west1.firebasedatabase.app")
+                .getReference("Sellit/Items");
+
+
         //check if there are no empty field and if entered price is an int
         TextWatcher mTextWatcher = new TextWatcher() {
             @Override
@@ -101,10 +115,6 @@ public class ManageUsersAdapter extends RecyclerView.Adapter<ManageUsersAdapter.
             @Override
             public void onClick(View view) {
 
-                //get ref
-                userRef = FirebaseDatabase.getInstance("https://sell-86b95-default-rtdb.europe-west1.firebasedatabase.app")
-                        .getReference("Sellit/Users/"+curentUser.getUserId());
-
                 String updatedBalanceString = holder.textEnterBalance.getText().toString().trim();
                 double bal = Double.parseDouble(updatedBalanceString);
 
@@ -128,22 +138,52 @@ public class ManageUsersAdapter extends RecyclerView.Adapter<ManageUsersAdapter.
                             public void onClick(DialogInterface dialog, int i) {
                                 //dismiss alert box and delete item
                                 dialog.dismiss();
-                                //delete
-                                //get realtime database item path
-                                userRef = FirebaseDatabase.getInstance("https://sell-86b95-default-rtdb.europe-west1.firebasedatabase.app")
-                                        .getReference("Sellit/Users/"+curentUser.getUserId());
 
-                                //TODO: delete all user's items?? or change data structure (items under users)
 
-                                //delete user from realtime database
-                                userRef.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                itemRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
-                                    public void onSuccess(Void unused) {
-                                        Toast.makeText(mContext, "user deleted", Toast.LENGTH_SHORT).show();
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        StorageReference storage = FirebaseStorage.getInstance("gs://sell-86b95.appspot.com")
+                                                .getReference("Sellit/Items/"+curentUser.getUserId());
 
-                                        //refresh my items
-                                        Intent intent = new Intent(mContext, AdminActivity.class);
-                                        mContext.startActivity(intent);
+                                        for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                                            //DELETE ITEMS FROM REALTIME DATABASE
+                                            if (postSnapshot.child("user_id").getValue().equals(curentUser.getUserId())) {
+                                                //if item belongs to this user
+                                                itemRef.child(postSnapshot.getKey()).removeValue();
+
+                                                //DELETE ITEM FROM STORAGE
+                                                //get image name
+                                                String storageName = String.valueOf(postSnapshot.child("storageId").getValue());
+                                                //get item storageRef image
+                                                storage.child(storageName).delete();
+                                            }
+
+                                        }
+
+
+                                        //USER DELETION
+                                        userRef = FirebaseDatabase.getInstance("https://sell-86b95-default-rtdb.europe-west1.firebasedatabase.app")
+                                                .getReference("Sellit/Users/"+curentUser.getUserId());
+
+                                        //DELETE USER
+                                        userRef.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+                                                Toast.makeText(mContext, "user deleted", Toast.LENGTH_SHORT).show();
+
+                                                //refresh my items
+                                                Intent intent = new Intent(mContext, AdminActivity.class);
+                                                mContext.startActivity(intent);
+
+                                                //TODO: delete user from firebase authentication
+                                            }
+                                        });
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
                                     }
                                 });
                             }

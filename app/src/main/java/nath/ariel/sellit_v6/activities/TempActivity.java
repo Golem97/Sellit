@@ -26,7 +26,7 @@ import nath.ariel.sellit_v6.databinding.ActivityTempBinding;
  */
 public class TempActivity extends AppCompatActivity {
 
-    private static final String PASSWORD = "abcd";
+    private static final String PASSWORD = "admin";
 
     //view  Binding
     private ActivityTempBinding binding ;

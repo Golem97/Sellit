@@ -110,7 +110,6 @@ public class ManageusersActivity extends AppCompatActivity {
                 mAdapter = new ManageUsersAdapter(ManageusersActivity.this, mUploads);
                 mAdapter.notifyDataSetChanged();
                 mRecyclerView.setAdapter(mAdapter);
-
             }
 
             //When we don't have permission to access the data
@@ -119,7 +118,6 @@ public class ManageusersActivity extends AppCompatActivity {
                 Toast.makeText(ManageusersActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
     private void setProfilePicture(Uri profilePictureUrl) {
@@ -128,5 +126,4 @@ public class ManageusersActivity extends AppCompatActivity {
                 .apply(RequestOptions.circleCropTransform())
                 .into(binding.profileImageManage);
     }
-
 }
