@@ -94,7 +94,7 @@ public class ProfileActivity extends AppCompatActivity {
         binding.chatIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MyItemsActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
                 startActivity(intent);
             }
         });

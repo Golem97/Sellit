@@ -216,7 +216,7 @@ public class SellerActivity extends AppCompatActivity {
                                     String storageId = String.format("%d.%s", picId, getFileExtension(imageUrl));
 
                                     //create item
-                                    Item item = new Item(id, name, descript, price, true, downloadUrl, storageId);
+                                    Item item = new Item(id, name, descript, price, downloadUrl, storageId);
 
                                     //push it and save item_id
                                     String itemId = database.child("Items").push().getKey();

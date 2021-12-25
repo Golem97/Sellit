@@ -19,7 +19,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -71,19 +82,19 @@ public class ManageUsersAdapter extends RecyclerView.Adapter<ManageUsersAdapter.
     //Displays item title, item price and image
     @Override
     public void onBindViewHolder(ManageUsersAdapter.ImageViewHolder holder, int position) {
-        User curentUser = mUsers.get(position);
+        User currentUser = mUsers.get(position);
 
         //name
-        holder.textViewName.setText(curentUser.getName());
+        holder.textViewName.setText(currentUser.getName());
 
         //balance
-        double balance = curentUser.getBalance();
+        double balance = currentUser.getBalance();
         holder.textViewBalance.setText("Balance: "+(balance) + " $");
 
 
         //get user reference
         userRef = FirebaseDatabase.getInstance("https://sell-86b95-default-rtdb.europe-west1.firebasedatabase.app")
-                .getReference("Sellit/Users/"+curentUser.getUserId());
+                .getReference("Sellit/Users/"+currentUser.getUserId());
 
         itemRef = FirebaseDatabase.getInstance("https://sell-86b95-default-rtdb.europe-west1.firebasedatabase.app")
                 .getReference("Sellit/Items");
@@ -144,11 +155,11 @@ public class ManageUsersAdapter extends RecyclerView.Adapter<ManageUsersAdapter.
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         StorageReference storage = FirebaseStorage.getInstance("gs://sell-86b95.appspot.com")
-                                                .getReference("Sellit/Items/"+curentUser.getUserId());
+                                                .getReference("Sellit/Items/"+currentUser.getUserId());
 
                                         for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                                             //DELETE ITEMS FROM REALTIME DATABASE
-                                            if (postSnapshot.child("user_id").getValue().equals(curentUser.getUserId())) {
+                                            if (postSnapshot.child("user_id").getValue().equals(currentUser.getUserId())) {
                                                 //if item belongs to this user
                                                 itemRef.child(postSnapshot.getKey()).removeValue();
 
@@ -164,19 +175,20 @@ public class ManageUsersAdapter extends RecyclerView.Adapter<ManageUsersAdapter.
 
                                         //USER DELETION
                                         userRef = FirebaseDatabase.getInstance("https://sell-86b95-default-rtdb.europe-west1.firebasedatabase.app")
-                                                .getReference("Sellit/Users/"+curentUser.getUserId());
+                                                .getReference("Sellit/Users/"+currentUser.getUserId());
 
                                         //DELETE USER
                                         userRef.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void unused) {
-                                                Toast.makeText(mContext, "user deleted", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(mContext, "User deleted", Toast.LENGTH_SHORT).show();
 
                                                 //refresh my items
                                                 Intent intent = new Intent(mContext, AdminActivity.class);
                                                 mContext.startActivity(intent);
 
                                                 //TODO: delete user from firebase authentication
+
                                             }
                                         });
                                     }
@@ -200,7 +212,6 @@ public class ManageUsersAdapter extends RecyclerView.Adapter<ManageUsersAdapter.
             }
         });
     }
-
 
     //Returns number of items in list
     @Override

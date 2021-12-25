@@ -15,7 +15,7 @@
         <entry key="..\:/Users/jorda/Desktop/AndroidProjects/Sellit/app/src/main/res/layout/activity_adminimage.xml" value="0.16893115942028986" />
         <entry key="..\:/Users/jorda/Desktop/AndroidProjects/Sellit/app/src/main/res/layout/activity_adminitems.xml" value="0.12360688956433637" />
         <entry key="..\:/Users/jorda/Desktop/AndroidProjects/Sellit/app/src/main/res/layout/activity_buyer.xml" value="0.2" />
-        <entry key="..\:/Users/jorda/Desktop/AndroidProjects/Sellit/app/src/main/res/layout/activity_image.xml" value="0.1640625" />
+        <entry key="..\:/Users/jorda/Desktop/AndroidProjects/Sellit/app/src/main/res/layout/activity_image.xml" value="0.2" />
         <entry key="..\:/Users/jorda/Desktop/AndroidProjects/Sellit/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/jorda/Desktop/AndroidProjects/Sellit/app/src/main/res/layout/activity_managecardview.xml" value="0.184375" />
         <entry key="..\:/Users/jorda/Desktop/AndroidProjects/Sellit/app/src/main/res/layout/activity_manageusers.xml" value="0.264" />
@@ -25,22 +25,10 @@
         <entry key="..\:/Users/jorda/Desktop/AndroidProjects/Sellit/app/src/main/res/layout/activity_seller.xml" value="0.4" />
         <entry key="..\:/Users/jorda/Desktop/AndroidProjects/Sellit/app/src/main/res/layout/activity_temp.xml" value="0.264" />
         <entry key="..\:/Users/jorda/Desktop/AndroidProjects/Sellit/app/src/main/res/layout/image_item.xml" value="0.264" />
-        <entry key="..\:/Users/yalit/AndroidStudioProjects/Sellit/app/src/main/res/layout/activity_adminitems.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/yalit/AndroidStudioProjects/Sellit/app/src/main/res/layout/activity_buyer.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/yalit/AndroidStudioProjects/Sellit/app/src/main/res/layout/activity_chat.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/yalit/AndroidStudioProjects/Sellit/app/src/main/res/layout/activity_chat1.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/yalit/AndroidStudioProjects/Sellit/app/src/main/res/layout/activity_image.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/yalit/AndroidStudioProjects/Sellit/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/yalit/AndroidStudioProjects/Sellit/app/src/main/res/layout/activity_managecardview.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/yalit/AndroidStudioProjects/Sellit/app/src/main/res/layout/activity_manageusers.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/yalit/AndroidStudioProjects/Sellit/app/src/main/res/layout/activity_myimage.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/yalit/AndroidStudioProjects/Sellit/app/src/main/res/layout/activity_myitems.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/yalit/AndroidStudioProjects/Sellit/app/src/main/res/layout/activity_profile.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/yalit/AndroidStudioProjects/Sellit/app/src/main/res/layout/activity_seller.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

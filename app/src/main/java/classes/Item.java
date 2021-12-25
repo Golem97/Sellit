@@ -15,7 +15,6 @@ public class Item {
     private String name;
     private String description;
     private double price;
-    private boolean available;
     private String photoUrl;
     private String storageId;
 
@@ -25,13 +24,12 @@ public class Item {
     }
 
     //Constructor
-    public Item(String user_id, String name, String description, double price, boolean available, String photoUrl,String storageId) {
+    public Item(String user_id, String name, String description, double price, String photoUrl,String storageId) {
         this.item_id="";
         this.user_id = user_id;
         this.name = name;
         this.description = description;
         this.price = price;
-        this.available = available;
         this.photoUrl = photoUrl;
         this.storageId = storageId;
     }
@@ -66,14 +64,6 @@ public class Item {
     }
 
     public void setPrice(double price) { this.price = price; }
-
-    public boolean isAvailable() {
-        return available;
-    }
-
-    public void setAvailable(boolean available) {
-        this.available = available;
-    }
 
     public String getPhotoUrl() {
         return photoUrl;

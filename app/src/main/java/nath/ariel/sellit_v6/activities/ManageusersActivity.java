@@ -77,7 +77,6 @@ public class ManageusersActivity extends AppCompatActivity {
         //get user
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-        String id = firebaseAuth.getUid();
 
         //set profile picture
         setProfilePicture(firebaseUser.getPhotoUrl());
@@ -103,8 +102,11 @@ public class ManageusersActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) { //dataSnapshot is a List containing our data
                 mUploads.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    User user = postSnapshot.getValue(User.class);
-                    mUploads.add(user);
+                    //we want to display all users ecept current one
+                    if(!postSnapshot.getKey().equals(firebaseAuth.getUid())) {
+                        User user = postSnapshot.getValue(User.class);
+                        mUploads.add(user);
+                    }
                 }
 
                 mAdapter = new ManageUsersAdapter(ManageusersActivity.this, mUploads);
