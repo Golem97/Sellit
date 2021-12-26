@@ -71,34 +71,38 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ImageVie
         Message currentMessage = mMessages.get(position);
 
 
-            //holder.textViewName.setText(currentMessage.getUser_sender_id());
 
-            //holder.textViewTime.setText(currentMessage.getDate());
+        userRef = FirebaseDatabase.getInstance("https://sell-86b95-default-rtdb.europe-west1.firebasedatabase.app")
+                .getReference("Sellit/Users/");
+
+        String userid = currentMessage.getUser_sender_id();
+
+            holder.textViewTime.setText(currentMessage.getDate());
 
             holder.textViewMessage.setText(currentMessage.getContent());
 
-//            String userid = currentMessage.getUser_receiver_id();
-//        userRef = FirebaseDatabase.getInstance("https://sell-86b95-default-rtdb.europe-west1.firebasedatabase.app")
-//                .getReference("Sellit/Users/");
-//
-//        Task<DataSnapshot> userData = userRef.child(userid).get();
-//        userData.addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
-//            @Override
-//            public void onSuccess(DataSnapshot dataSnapshot) {
-//                String picUrl = String.valueOf(dataSnapshot.child("profilePicture").getValue());
-//
-//                Glide.with(mContext)
-//                        .load(picUrl)
-//                        .apply(RequestOptions.circleCropTransform())
-//                        .into(holder.profilePic);
-//            }
-//        });
+
+
+        Task<DataSnapshot> userData = userRef.child(userid).get();
+        userData.addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                String username = String.valueOf(dataSnapshot.child("name").getValue());
+
+                String picUrl = String.valueOf(dataSnapshot.child("profilePicture").getValue());
+
+                Glide.with(mContext)
+                        .load(picUrl)
+                        .apply(RequestOptions.circleCropTransform())
+                        .into(holder.profilePic);
+            }
+        });
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mMessages.size();
     }
 
     public Context getContext() {
@@ -120,17 +124,15 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ImageVie
 
     //ImageViewHolder Inner Class
     public class ImageViewHolder extends RecyclerView.ViewHolder {
-        public TextView textViewName;
         public TextView textViewTime;
         public TextView textViewMessage;
         public ImageView profilePic;
 
         public ImageViewHolder(View itemView) {
             super(itemView);
-            //textViewName = itemView.findViewById(R.id.text_view_sender);
-            //textViewTime = itemView.findViewById(R.id.text_view_time);
+            textViewTime = itemView.findViewById(R.id.text_view_time);
             textViewMessage= itemView.findViewById(R.id.text_view_message);
-            //profilePic = itemView.findViewById(R.id.profileImageChat);
+            profilePic = itemView.findViewById(R.id.profileImageChat);
         }
     }
 }

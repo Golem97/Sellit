@@ -17,7 +17,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -38,6 +41,7 @@ public class AdminImageAdapter extends RecyclerView.Adapter<AdminImageAdapter.Im
 
     private StorageReference storedImage;
     private DatabaseReference imageRef;
+    private DatabaseReference userRef;
 
     //constructor
     public AdminImageAdapter(Context context, List<Item> items) {
@@ -68,9 +72,22 @@ public class AdminImageAdapter extends RecyclerView.Adapter<AdminImageAdapter.Im
         String priceText = String.valueOf(currentItem.getPrice());
         holder.textViewPrice.setText((priceText) + " $");
 
-        //TODO: find name with user id
-        String postedBy = String.valueOf(currentItem.getUser_id());
-        holder.postedBy.setText(postedBy);
+
+        userRef = FirebaseDatabase.getInstance("https://sell-86b95-default-rtdb.europe-west1.firebasedatabase.app")
+                .getReference("Sellit/Users/");
+
+        String userId = currentItem.getUser_id();
+        Task<DataSnapshot> userData = userRef.child(userId).get();
+        userData.addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+
+                String postedBy = String.valueOf(dataSnapshot.child(userId).child("name").getValue());
+                holder.postedBy.setText(postedBy);
+            }
+        });
+
+
 
 
         //picture
