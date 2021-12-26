@@ -72,6 +72,15 @@ public class TempActivity extends AppCompatActivity {
             }
         });
 
+        //handle click on chat Image button
+        binding.chatIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), AllChatsActivity.class);
+                startActivity(intent);
+            }
+        });
+
         //hidden password
         binding.passwordAdmin.setTransformationMethod(new PasswordTransformationMethod());
 

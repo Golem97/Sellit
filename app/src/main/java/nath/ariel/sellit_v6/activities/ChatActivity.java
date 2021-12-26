@@ -148,6 +148,15 @@ public class ChatActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        //handle click on chat Image button
+        binding.ChatImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), AllChatsActivity.class);
+                startActivity(intent);
+            }
+        });
+
         mUploads = new ArrayList<>();
         //get data
         chatsReference.child(id).child(sellerId).addValueEventListener(new ValueEventListener() {

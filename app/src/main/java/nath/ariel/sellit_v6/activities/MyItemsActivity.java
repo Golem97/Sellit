@@ -1,9 +1,11 @@
 package nath.ariel.sellit_v6.activities;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -84,6 +86,15 @@ public class MyItemsActivity extends AppCompatActivity {
         mRecyclerView = binding.recyclerViewMyItems;
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        //handle click on chat Image button
+        binding.chatIconMyItems.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), AllChatsActivity.class);
+                startActivity(intent);
+            }
+        });
 
         mUploads = new ArrayList<>();
 

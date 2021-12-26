@@ -94,6 +94,15 @@ public class SellerActivity extends AppCompatActivity {
         binding.descript.addTextChangedListener(mTextWatcher);
         binding.price.addTextChangedListener(mTextWatcher);
 
+        //handle click on chat Image button
+        binding.chatIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), AllChatsActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         //handle click on Imageupload button
         binding.uploadImage.setOnClickListener(new View.OnClickListener() {

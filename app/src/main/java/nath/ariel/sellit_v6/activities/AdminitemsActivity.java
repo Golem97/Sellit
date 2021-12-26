@@ -1,9 +1,11 @@
 package nath.ariel.sellit_v6.activities;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -91,6 +93,15 @@ public class AdminitemsActivity extends AppCompatActivity {
         mDatabaseReference = FirebaseDatabase.getInstance("https://sell-86b95-default-rtdb.europe-west1.firebasedatabase.app")
                 .getReference("Sellit/Items");
 
+
+        //handle click on chat Image button
+        binding.chatIconAdminItems.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), AllChatsActivity.class);
+                startActivity(intent);
+            }
+        });
 
         mDatabaseReference.addValueEventListener(new ValueEventListener() {
             //get data

@@ -43,10 +43,10 @@
 
     <ImageButton
         android:id="@+id/chatIcon"
-        android:layout_width="77dp"
-        android:layout_height="77dp"
+        android:layout_width="78dp"
+        android:layout_height="80dp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/chat_icon"
+        android:src="@drawable/ic_baseline_chat_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.014"

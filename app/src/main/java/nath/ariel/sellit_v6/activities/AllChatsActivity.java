@@ -5,6 +5,7 @@ import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -85,6 +86,15 @@ public class AllChatsActivity extends AppCompatActivity {
         //set Username
         String name = firebaseUser.getDisplayName();
         binding.nameTvAllChats.setText(name);
+
+        //handle click on chat Image button
+        binding.chatIconAllChats.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), AllChatsActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
 //        //save currentUser seller's id

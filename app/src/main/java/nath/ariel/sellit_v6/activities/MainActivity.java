@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
                             String name = firebaseUser.getDisplayName();
 
                             //Create User
-                            User user = new User(uid,name,profilePic,email,100);
+                            User user = new User(uid,name,profilePic,email,0);
 
                             usersPathDatabase = FirebaseDatabase.getInstance("https://sell-86b95-default-rtdb.europe-west1.firebasedatabase.app")
                                     .getReference("Sellit").child("Users");
