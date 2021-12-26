@@ -89,6 +89,16 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        //handle click on chat Image button
+        binding.contactAdmin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
+                intent.putExtra("sellerId","lk9i02Hn0vcKmQSf2dRQEtd9UKr2");
+                startActivity(intent);
+            }
+        });
+
         //handle click on myItems button
         binding.myItemsBtnCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
