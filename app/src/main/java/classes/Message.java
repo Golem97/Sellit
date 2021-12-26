@@ -13,7 +13,7 @@ public class Message {
 
     private String message_id;
     private String user_sender_id;
-    private String user_reciever_id;
+    private String user_receiver_id;
     private String date;
     private String content;
 
@@ -22,13 +22,14 @@ public class Message {
     }
 
     //Constructor
-    public Message(String user_sender_id, String user_reciever_id, String date, String content) {
+    public Message(String user_sender_id, String user_receiver_id, String date, String content) {
         this.message_id="";
         this.user_sender_id = user_sender_id;
-        this.user_reciever_id = user_reciever_id;
+        this.user_receiver_id = user_receiver_id;
         this.date = date;
         this.content = content;
     }
+
     public String getMessage_id() {
         return message_id;
     }
@@ -37,21 +38,23 @@ public class Message {
         this.message_id = message_id;
     }
 
-    public String getSender_id() {
+    public String getUser_sender_id() {
         return user_sender_id;
     }
 
-    public void setSender_id(String user_sender_id) {
+    public void setUser_sender_id(String user_sender_id) {
         this.user_sender_id = user_sender_id;
     }
 
-    public String getReciever() {
-        return user_reciever_id;
+    public String getUser_receiver_id() {
+        return user_receiver_id;
     }
 
-    public void setReciever(String user_reciever_id) { this.user_reciever_id = user_reciever_id; }
+    public void setUser_receiver_id(String user_receiver_id) {
+        this.user_receiver_id = user_receiver_id;
+    }
 
-    public String date() {
+    public String getDate() {
         return date;
     }
 
@@ -59,10 +62,11 @@ public class Message {
         this.date = date;
     }
 
-    public String content() {
+    public String getContent() {
         return content;
     }
 
-    public void setContent(String content) { this.content = content; }
-
+    public void setContent(String content) {
+        this.content = content;
+    }
 }

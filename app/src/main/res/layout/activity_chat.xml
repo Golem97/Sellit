@@ -12,7 +12,7 @@
 
 
     <ImageView
-        android:id="@+id/chatIcon"
+        android:id="@+id/chatIconChat"
         android:layout_width="77dp"
         android:layout_height="77dp"
         android:layout_centerHorizontal="true"
@@ -26,87 +26,77 @@
 
 
     <Button
-        android:id="@+id/sendbtn"
-        android:layout_width="158dp"
-        android:layout_height="54dp"
+        android:id="@+id/sendbtnChat"
+        android:layout_width="145dp"
+        android:layout_height="48dp"
         android:text="SEND"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.939"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.787"
+        app:layout_constraintVertical_bias="1.0"
         tools:ignore="MissingConstraints" />
 
+    <EditText
+        android:id="@+id/messageChat"
+        android:layout_width="179dp"
+        android:layout_height="46dp"
+        android:ems="10"
+        android:hint="message"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/sendbtnChat"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
-        android:id="@+id/customerImageView"
+        android:id="@+id/ChatImageView"
         android:layout_width="74dp"
         android:layout_height="75dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.8"
-        app:layout_constraintStart_toEndOf="@+id/chatIcon"
+        app:layout_constraintStart_toEndOf="@+id/chatIconChat"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.024"
         app:srcCompat="@drawable/ic_anon_user_48dp" />
 
     <TextView
-        android:id="@+id/nameTvCustomer"
+        android:id="@+id/nameTvChat"
         style="@style/MaterialAlertDialog.MaterialComponents.Title.Icon"
         android:layout_width="111dp"
         android:layout_height="34dp"
         android:text="Username"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/customerImageView"
+        app:layout_constraintEnd_toEndOf="@+id/ChatImageView"
         app:layout_constraintHorizontal_bias="0.52"
-        app:layout_constraintStart_toStartOf="@+id/customerImageView"
-        app:layout_constraintTop_toBottomOf="@+id/customerImageView"
+        app:layout_constraintStart_toStartOf="@+id/ChatImageView"
+        app:layout_constraintTop_toBottomOf="@+id/ChatImageView"
         app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints" />
 
-    <EditText
-        android:id="@+id/sender_id"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/relativeLayoutChat"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="sender"
-        tools:layout_editor_absoluteX="74dp"
-        tools:layout_editor_absoluteY="236dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="36dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/nameTvChat">
 
-    <EditText
-        android:id="@+id/reciever_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="reciever"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.412" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_chat"
+            android:layout_width="385dp"
+            android:layout_height="414dp" />
 
-    <EditText
-        android:id="@+id/message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="message"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.594" />
+
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

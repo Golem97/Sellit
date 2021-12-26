@@ -3,76 +3,75 @@ package nath.ariel.sellit_v6.activities;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.webkit.MimeTypeMap;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.StorageTask;
-import com.google.firebase.storage.UploadTask;
+import com.google.firebase.database.ValueEventListener;
 
+import classes.ImageAdapter;
 import classes.Item;
 import classes.Message;
+import classes.MessageAdapter;
 import nath.ariel.sellit_v6.R;
 
 import nath.ariel.sellit_v6.databinding.ActivityChatBinding;
 
 
-import java.time.format.DateTimeFormatter;
-import java.time.LocalDateTime;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-
+import java.util.List;
 
 
 public class ChatActivity extends AppCompatActivity {
 
-    private static final int PICK_IMAGE_REQUEST = 1;
-
     //firebase
-    private StorageReference storage;
-    private DatabaseReference database;
+    private DatabaseReference chatsReference;
+    private DatabaseReference userReference;
+
     private FirebaseAuth firebaseAuth;
+
+    //RecyclerView layout
+    private RecyclerView mRecyclerView;
+
+    //Adapter
+    private MessageAdapter mAdapter = new MessageAdapter();
+    ;
+
+    //Items List
+    private List<Message> mUploads;
 
     //binding
     private ActivityChatBinding binding;
 
-    //image url
-    private Uri imageUrl;
-
-    private StorageTask mUploadTask;
-
     //TAG
-    private static final String TAG = "SELLER_ACTIVITY_IN_TAG";
-
+    private static final String TAG = "CHAT_ACTIVITY_IN_TAG";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_seller);
+        setContentView(R.layout.activity_chat);
 
         Log.d(TAG, "Entering Activity");
 
@@ -86,62 +85,120 @@ public class ChatActivity extends AppCompatActivity {
         //get user
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        String id = firebaseUser.getUid();
 
-        //get our storage and database references
-        database = FirebaseDatabase.getInstance("https://sell-86b95-default-rtdb.europe-west1.firebasedatabase.app").getReference("Sellit");
-        storage = FirebaseStorage.getInstance("gs://sell-86b95.appspot.com").getReference("Sellit");
-
+        //set profile picture
+        setProfilePicture(firebaseUser.getPhotoUrl());
 
         //set Username
         String name = firebaseUser.getDisplayName();
-        binding.nameTvCustomer.setText(name);
+        binding.nameTvChat.setText(name);
 
 
+        //set messageChat EditText
+        binding.messageChat.addTextChangedListener(mTextWatcher);
 
 
-        //handle click on upload button
-        binding.sendbtn.setOnClickListener(new View.OnClickListener() {
+        //Get sellerId from chat btn
+        Intent intent = getIntent();
+        String sellerId = intent.getStringExtra("sellerId");
+
+        //Get References
+        chatsReference = FirebaseDatabase.getInstance("https://sell-86b95-default-rtdb.europe-west1.firebasedatabase.app")
+                .getReference("Sellit/Chats/");
+        userReference = FirebaseDatabase.getInstance("https://sell-86b95-default-rtdb.europe-west1.firebasedatabase.app")
+                .getReference("Sellit/Users/");
+
+        binding.sendbtnChat.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                //avoid uploading when no image and uploading too many times by clicking on upload button too fast
-                if (mUploadTask != null && mUploadTask.isInProgress()) {
-                    Toast.makeText(ChatActivity.this, "Upload in progress", Toast.LENGTH_SHORT).show();
-                } else {
-                    //upload to storage
-                    uploadMessage();
-                }
+            public void onClick(View view) {
+
+                Task<DataSnapshot> userData = userReference.child(id).get();
+
+                userData.addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                    @Override
+                    public void onSuccess(DataSnapshot dataSnapshot) {
+
+                        String date = new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm:ss")
+                                .format(Calendar.getInstance().getTime());
+
+                        String userName = String.valueOf(dataSnapshot.child("name").getValue());
+
+                        String content = binding.messageChat.getText().toString().trim();
+                        content = userName+": "+content;
+
+                        Message message = new Message(id,sellerId,date,content);
+
+                        String chatId = chatsReference.child(id).child(sellerId).push().getKey();
+                        message.setMessage_id(chatId);
+                        chatsReference.child(id).child(sellerId).child(chatId).setValue(message);
+                        chatsReference.child(sellerId).child(id).child(chatId).setValue(message);
+
+//                        Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
+//                        startActivity(intent);
+                        Toast.makeText(ChatActivity.this, "Message sent successfully", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
             }
         });
+
+        //RecyclerView Initialisation + Settings
+        mRecyclerView = binding.recyclerViewChat;
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        mUploads = new ArrayList<>();
+        //get data
+        chatsReference.child(id).child(sellerId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) { //dataSnapshot is a List containing our data
+                mUploads.clear();
+
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    //get message
+                    Message message = postSnapshot.getValue(Message.class);
+                        mUploads.add(message);
+                }
+                //update adapter
+                mAdapter.setContext(ChatActivity.this);
+                mAdapter.setMessages(mUploads);
+
+                //set RecyclerView with updated adapter
+                mRecyclerView.setAdapter(mAdapter);
+            }
+
+            //When we don't have permission to access the data
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+
+
     }
 
-
-    private void uploadMessage() {
-
-        String sender = String.valueOf(binding.recieverId.getText());
-        String reciever = String.valueOf(binding.senderId.getText());
-        String date = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
-        String content = String.valueOf(binding.message.getText());
-
-
-        //create item
-        Message Message = new Message(sender, reciever, date, content);
-
-        //push it and save item_id
-        String MessageId = database.child("Messages").push().getKey();
-
-        //set item id
-        Message.setMessage_id(MessageId);
-
-        //check item id
-        Log.d(TAG, "MessageId = "+Message.getMessage_id());
-
-        //set value with item attributes
-        database.child("messages").child(MessageId).setValue(Message);
-
-        Toast.makeText(ChatActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
-
-        //After successfully uploading item redirect to profile
-        Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-        startActivity(intent);
+    private void setProfilePicture(Uri profilePictureUrl) {
+        Glide.with(this)
+                .load(profilePictureUrl)
+                .apply(RequestOptions.circleCropTransform())
+                .into(binding.ChatImageView);
     }
+
+    //check if there are no empty field and if entered price is an int
+    private TextWatcher mTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            String content = binding.messageChat.getText().toString().trim();
+            binding.sendbtnChat.setEnabled(!content.isEmpty());
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+        }
+    };
 }

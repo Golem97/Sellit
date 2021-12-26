@@ -32,6 +32,7 @@ import java.util.List;
 
 import nath.ariel.sellit_v6.R;
 import nath.ariel.sellit_v6.activities.AdminActivity;
+import nath.ariel.sellit_v6.activities.ChatActivity;
 import nath.ariel.sellit_v6.activities.ProfileActivity;
 
 /**
@@ -79,6 +80,19 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
                 .centerCrop()
                 .fitCenter()
                 .into(holder.imageView);
+
+        holder.chatBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                    //save currentItem seller's id
+                    String sellerId = currentItem.getUser_id();
+                    Intent intent = new Intent(mContext, ChatActivity.class);
+                    intent.putExtra("sellerId",sellerId);
+                    mContext.startActivity(intent);
+
+            }
+        });
 
         holder.buyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -202,6 +216,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
         public TextView textViewPrice;
         public ImageView imageView;
         public Button buyBtn;
+        public Button chatBtn;
 
         public ImageViewHolder(View itemView) {
             super(itemView);
@@ -209,6 +224,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
             textViewPrice = itemView.findViewById(R.id.text_view_price);
             imageView = itemView.findViewById(R.id.image_view_upload);
             buyBtn = itemView.findViewById(R.id.buyBtn);
+            chatBtn = itemView.findViewById(R.id.chatBtn);
         }
     }
 }

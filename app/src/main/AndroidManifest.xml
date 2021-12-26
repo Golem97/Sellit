@@ -16,6 +16,7 @@
             android:name=".activities.BuyerActivity"
             android:exported="false" />
         <activity android:name=".activities.AdminActivity" />
+        <activity android:name=".activities.ChatActivity" />
         <activity android:name=".activities.AdminitemsActivity" />
         <activity android:name=".activities.ManageusersActivity" />
         <activity android:name=".activities.ProfileActivity" />
