@@ -52,7 +52,7 @@ public class AdminitemsActivity extends AppCompatActivity {
     private ActivityAdminitemsBinding binding;
 
     //TAG
-    private static final String TAG = "MY_ITEM_ACTIVITY_IN_TAG";
+    private static final String TAG = "ADMIN_ITEMS_ACTIVITY";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

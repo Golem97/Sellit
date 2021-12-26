@@ -20,6 +20,18 @@ public class User {
     private String userId; //obtained by signing in to Google
     private String name; //obtained by signing in to Google
     private String profilePicture; //obtained by signing in to Google
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId='" + userId + '\'' +
+                ", name='" + name + '\'' +
+                ", profilePicture='" + profilePicture + '\'' +
+                ", email='" + email + '\'' +
+                ", balance=" + balance +
+                '}';
+    }
+
     private String email; //obtained by signing in to Google
     private double balance;
 

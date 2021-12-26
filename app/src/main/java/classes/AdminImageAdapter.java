@@ -77,7 +77,8 @@ public class AdminImageAdapter extends RecyclerView.Adapter<AdminImageAdapter.Im
                 .getReference("Sellit/Users/");
 
         String userId = currentItem.getUser_id();
-        Task<DataSnapshot> userData = userRef.child(userId).get();
+
+        Task<DataSnapshot> userData = userRef.get();
         userData.addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
